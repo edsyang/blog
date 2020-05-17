@@ -1,0 +1,270 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>语言元素 | Edsyang</title><meta name="description" content="指令和程序计算机的硬件系统通常由五大部分构成: 运算器、控制器、存储器、输入设备和输出设备; 其中, 运算器和控制器放在一起就是常说的中央处理器, 它的功能是执行各种运算和控制指令以及处理计算机软件中的数据; 我们通常所说的程序实际上就是指令的集合, 就是将一系列的指令按照某种方式组织到一起, 然后通过这些指令去控制计算机做我们想让它做的事情; 我们今天使用的计算机虽然器件做工越来越精密, 处理能"><meta name="keywords" content="Personal blog about font-end technology &amp; record others"><meta name="author" content="Edsyang,1966861494@qq.com"><meta name="copyright" content="Edsyang"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.svg"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="语言元素"><meta name="twitter:description" content="指令和程序计算机的硬件系统通常由五大部分构成: 运算器、控制器、存储器、输入设备和输出设备; 其中, 运算器和控制器放在一起就是常说的中央处理器, 它的功能是执行各种运算和控制指令以及处理计算机软件中的数据; 我们通常所说的程序实际上就是指令的集合, 就是将一系列的指令按照某种方式组织到一起, 然后通过这些指令去控制计算机做我们想让它做的事情; 我们今天使用的计算机虽然器件做工越来越精密, 处理能"><meta name="twitter:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg"><meta property="og:type" content="article"><meta property="og:title" content="语言元素"><meta property="og:url" content="http://blog.lagerstroemia.com.cn/2020/02/20/server/Python/basic/python-2/"><meta property="og:site_name" content="Edsyang"><meta property="og:description" content="指令和程序计算机的硬件系统通常由五大部分构成: 运算器、控制器、存储器、输入设备和输出设备; 其中, 运算器和控制器放在一起就是常说的中央处理器, 它的功能是执行各种运算和控制指令以及处理计算机软件中的数据; 我们通常所说的程序实际上就是指令的集合, 就是将一系列的指令按照某种方式组织到一起, 然后通过这些指令去控制计算机做我们想让它做的事情; 我们今天使用的计算机虽然器件做工越来越精密, 处理能"><meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg"><meta property="article:published_time" content="2020-02-20T10:15:41.779Z"><meta property="article:modified_time" content="2020-05-03T03:13:46.145Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://blog.lagerstroemia.com.cn/2020/02/20/server/Python/basic/python-2/"><link rel="prev" title="分支结构" href="http://blog.lagerstroemia.com.cn/2020/02/20/server/Python/basic/python-3/"><link rel="next" title="扩展" href="http://blog.lagerstroemia.com.cn/2020/02/17/js/es6/extend/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: {"languages":{"author":"作者: Edsyang","link":"链接: ","source":"来源: Edsyang","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Edsyang" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">152</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">6</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">37</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#指令和程序"><span class="toc-number">1.</span> <span class="toc-text">指令和程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量和类型"><span class="toc-number">2.</span> <span class="toc-text">变量和类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#变量命名"><span class="toc-number">2.1.</span> <span class="toc-text">变量命名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量的使用"><span class="toc-number">2.2.</span> <span class="toc-text">变量的使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符"><span class="toc-number">3.</span> <span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#练习"><span class="toc-number">4.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#练习1-华氏度转摄氏度"><span class="toc-number">4.1.</span> <span class="toc-text">练习1: 华氏度转摄氏度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习2-输入圆的半径计算圆的周长和面积"><span class="toc-number">4.2.</span> <span class="toc-text">练习2: 输入圆的半径计算圆的周长和面积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习3-输入年份判断是不是闰年"><span class="toc-number">4.3.</span> <span class="toc-text">练习3: 输入年份判断是不是闰年</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-number">5.</span> <span class="toc-text">补充: %</span></a></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Edsyang</a></span><span class="pull_right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">语言元素</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-02-20 10:15:41"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-02-20</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-05-03 03:13:46"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-05-03</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Server/">Server</a><i class="fa fa-angle-right post-meta__separator" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Server/Python/">Python</a><i class="fa fa-angle-right post-meta__separator" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Server/Python/basic/">basic</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="指令和程序"><a href="#指令和程序" class="headerlink" title="指令和程序"></a>指令和程序</h2><p>计算机的硬件系统通常由五大部分构成: <strong><em>运算器、控制器、存储器、输入设备和输出设备</em></strong>; 其中, 运算器和控制器放在一起就是常说的中央处理器, 它的功能是执行各种运算和控制指令以及处理计算机软件中的数据; 我们通常所说的程序实际上就是指令的集合, 就是将一系列的指令按照某种方式组织到一起, 然后通过这些指令去控制计算机做我们想让它做的事情; 我们今天使用的计算机虽然器件做工越来越精密, 处理能力越来越强, 但究其本质来说仍然属于“冯·诺依曼结构”的计算机, “冯·诺依曼结构”有两个关键点, 一是指出要将存储设备和中央处理器分开, 二是提出了数据以二进制方式编码; 对于计算机来说, 二进制在物理器件上来说是最容易实现的(高电压代表1, 低电压代表0), 于是“冯·诺依曼结构”的计算机都使用了二进制; 虽然并不需要每个程序员都能使用二进制的思维方式来工作, 但是了解二进制及它与我们生活中的十进制的转换关系, 以及二进制与八进制和十六进制的转换关系还是有必要的</p>
+<blockquote>
+<p>二进制是一种“逢二进一”的计数法, 和人类使用的“逢十进一”的计数法没有实质性的区别</p>
+</blockquote>
+<h2 id="变量和类型"><a href="#变量和类型" class="headerlink" title="变量和类型"></a>变量和类型</h2><p>在程序设计中, 变量是一种存储数据的载体; 计算机中的变量是实际存在的数据或者说是存储器存储数据的一块内存空间, 变量的值可以被读取和修改, 这是所有计算和控制的基础; 计算机能处理的数据有很多类型, 除了数值以外还可以处理问题、图形、音频、视频等各种数据, 那么不同的数据就需要定义不同的存储类型; Python 中的数据类型很多, 而且也允许我们自定义新的数据类型, 以下是一些常用的数据类型</p>
+<ul>
+<li><strong>整型</strong>: Python 中可以处理任意大小的整数, 而且支持二进制(如 <code>0b100</code>, 换算成十进制是4)、八进制(如<code>0o100</code>, 换算成十进制是64)、十进制(<code>100</code>)和十六进制(<code>0x100</code>, 换算成十进制是256)的表示法</li>
+<li><strong>浮点型</strong>: 浮点数就是小数, 之所以称为浮点数, 是因为按照科学计数法表示时, 一个浮点数的小数点位置是可变的, 浮点数除了数学写法(如 <code>123.456</code>)之外还支持科学计数法(如<code>1.23456e2</code>)</li>
+<li><strong>字符串型</strong>: 字符串是以单引号或双引号括起来的的任意文本, 如 <code>'hello'</code> 和 <code>"hello"</code>, 字符串还有原始字符串表示法、字节字符串表示法、Unicode 字符串表示法, 而且可以书写成多行的形式(用三个单引号或三个双引号开头, 三个单引号或三个双引号结尾)</li>
+<li><strong>布尔型</strong>: 布尔值只有 <code>True</code>、<code>False</code> 两种, 要么是 <code>True</code>, 要么是 <code>False</code>, 在 Python 中, 可以直接用 <code>True</code>、<code>False</code> 表示布尔值(<strong>注意大小写</strong>), 也可以通过布尔运算计算出来(如 <code>3 &lt; 5</code> 会产生布尔值 <code>True</code>, 而 <code>2 == 1</code> 会产生布尔值 <code>False</code>)</li>
+<li><strong>复数型</strong>: 形如 <code>3+5j</code>, 跟数学上的复数表示一样, 唯一不同的是虚部的 <code>i</code> 换成 <code>j</code> 了</li>
+</ul>
+<h3 id="变量命名"><a href="#变量命名" class="headerlink" title="变量命名"></a>变量命名</h3><p>变量命名需要遵循以下规则</p>
+<ul>
+<li>硬性规则<ul>
+<li>变量名由字母(广义的 Unicode 字符, 不包含特殊字符)、数字和下划线构成, 数字不能开头</li>
+<li>区分大小写</li>
+<li>不要跟关键字、系统保留字冲突</li>
+</ul>
+</li>
+<li>PEP 8 要求<ul>
+<li>用小写字母拼写, 多个单词用下划线连接</li>
+<li>受保护的实例属性用单个下划线开头</li>
+<li>私有的实例属性用两个下划线开头</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>同时也要注意变量的语意化</p>
+</blockquote>
+<h3 id="变量的使用"><a href="#变量的使用" class="headerlink" title="变量的使用"></a>变量的使用</h3><p>在对变量类型进行转换时可以使用 Python 的内置函数(准确的说下面列出的并不是真正意义上的函数, 而是创建对象的构造方法)</p>
+<ul>
+<li><code>int()</code>: 将一个数值或字符串转换成整数, 可以指定进制</li>
+<li><code>float()</code>: 将一个字符串转换成浮点数</li>
+<li><code>str()</code>: 将制定的对象转换成字符串形式, 可以指定编码</li>
+<li><code>chr()</code>: 将整数转换成该编码对应的字符串(一个字符)</li>
+<li><code>ord()</code>: 将字符串(一个字符)转换成对应的编码(整数)</li>
+</ul>
+<figure class="highlight py"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用变量保存数据并进行算术运算</span></span><br><span class="line">a = <span class="number">321</span></span><br><span class="line">b = <span class="number">123</span></span><br><span class="line">print(a + b)</span><br><span class="line">print(a - b)</span><br><span class="line">print(a * b)</span><br><span class="line">print(a / b)</span><br><span class="line">print(a // b)</span><br><span class="line">print(a % b)</span><br><span class="line">print(a ** b)</span><br><span class="line"><span class="comment"># 使用 input 函数输入, 使用 int() 进行类型转换, 用占位符格式化输出的字符串</span></span><br><span class="line">a = int(input(<span class="string">'a = '</span>))</span><br><span class="line">b = int(input(<span class="string">'b = '</span>))</span><br><span class="line">print(<span class="string">'%d + %d = %d'</span> % (a, b, a + b))</span><br><span class="line">print(<span class="string">'%d - %d = %d'</span> % (a, b, a - b))</span><br><span class="line">print(<span class="string">'%d * %d = %d'</span> % (a, b, a * b))</span><br><span class="line">print(<span class="string">'%d / %d = %f'</span> % (a, b, a / b))</span><br><span class="line">print(<span class="string">'%d // %d = %d'</span> % (a, b, a // b))</span><br><span class="line">print(<span class="string">'%d %% %d = %d'</span> % (a, b, a % b))</span><br><span class="line">print(<span class="string">'%d ** %d = %d'</span> % (a, b, a ** b))</span><br><span class="line"><span class="comment"># 使用 type() 检查变量的类型</span></span><br><span class="line">a = <span class="number">100</span></span><br><span class="line">b = <span class="number">12.345</span></span><br><span class="line">c = <span class="number">1</span> + <span class="number">5j</span></span><br><span class="line">d = <span class="string">'hello world'</span></span><br><span class="line">e = <span class="literal">True</span></span><br><span class="line">print(type(a))</span><br><span class="line">print(type(b))</span><br><span class="line">print(type(c))</span><br><span class="line">print(type(d))</span><br><span class="line">print(type(e))</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">&lt;class 'int'&gt;</span></span><br><span class="line"><span class="string">&lt;class 'float'&gt;</span></span><br><span class="line"><span class="string">&lt;class 'complex'&gt;</span></span><br><span class="line"><span class="string">&lt;class 'str'&gt;</span></span><br><span class="line"><span class="string">&lt;class 'bool'&gt;</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><p>Python 支持多种运算符, 下表大概按照优先级从高到低的顺序列出所有的运算符</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>[]</code> <code>[:]</code></td>
+<td>下标，切片</td>
+</tr>
+<tr>
+<td><code>**</code></td>
+<td>指数</td>
+</tr>
+<tr>
+<td><code>~</code> <code>+</code> <code>-</code></td>
+<td>按位取反, 正负号</td>
+</tr>
+<tr>
+<td><code>*</code> <code>/</code> <code>%</code> <code>//</code></td>
+<td>乘，除，模，整除</td>
+</tr>
+<tr>
+<td><code>+</code> <code>-</code></td>
+<td>加，减</td>
+</tr>
+<tr>
+<td><code>&gt;&gt;</code> <code>&lt;&lt;</code></td>
+<td>右移，左移</td>
+</tr>
+<tr>
+<td><code>&amp;</code></td>
+<td>按位与</td>
+</tr>
+<tr>
+<td><code>^</code> <code>|</code></td>
+<td>按位异或，按位或</td>
+</tr>
+<tr>
+<td><code>&lt;=</code> <code>&lt;</code> <code>&gt;</code> <code>&gt;=</code></td>
+<td>小于等于，小于，大于，大于等于</td>
+</tr>
+<tr>
+<td><code>==</code> <code>!=</code></td>
+<td>等于，不等于</td>
+</tr>
+<tr>
+<td><code>is</code>  <code>is not</code></td>
+<td>身份运算符</td>
+</tr>
+<tr>
+<td><code>in</code> <code>not in</code></td>
+<td>成员运算符</td>
+</tr>
+<tr>
+<td><code>not</code> <code>or</code> <code>and</code></td>
+<td>逻辑运算符</td>
+</tr>
+<tr>
+<td><code>=</code> <code>+=</code> <code>-=</code> <code>*=</code> <code>/=</code> <code>%=</code> <code>//=</code> <code>**=</code> <code>&amp;=</code> <code>|=</code> <code>^=</code> <code>&gt;&gt;=</code> <code>&lt;&lt;=</code></td>
+<td>（复合）赋值运算符</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>说明：</strong> 在实际开发中，如果搞不清楚运算符的优先级，可以使用括号来确保运算的执行顺序</p>
+</blockquote>
+<figure class="highlight py"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运算符的使用</span></span><br><span class="line">a = <span class="number">5</span></span><br><span class="line"><span class="string">''' 15 12 48 9.6 '''</span></span><br><span class="line">b = <span class="number">10</span></span><br><span class="line">c = <span class="number">3</span></span><br><span class="line">d = <span class="number">4</span></span><br><span class="line">e = <span class="number">5</span></span><br><span class="line">a += b</span><br><span class="line">a -= c</span><br><span class="line">a *= d</span><br><span class="line">a /= e</span><br><span class="line">print(<span class="string">'a = '</span>, a)</span><br><span class="line"><span class="string">''' 9.6 '''</span></span><br><span class="line"></span><br><span class="line">flag1 = <span class="number">3</span> &gt; <span class="number">2</span></span><br><span class="line">flag2 = <span class="number">2</span> &lt; <span class="number">1</span></span><br><span class="line">flag3 = flag1 <span class="keyword">and</span> flag2</span><br><span class="line">flag4 = flag1 <span class="keyword">or</span> flag2</span><br><span class="line">flag5 = <span class="keyword">not</span> flag1</span><br><span class="line">print(<span class="string">'flag1 = '</span>, flag1)</span><br><span class="line">print(<span class="string">'flag2 = '</span>, flag2)</span><br><span class="line">print(<span class="string">'flag3 = '</span>, flag3)</span><br><span class="line">print(<span class="string">'flag4 = '</span>, flag4)</span><br><span class="line">print(<span class="string">'flag5 = '</span>, flag5)</span><br><span class="line">print(flag1 <span class="keyword">is</span> <span class="literal">True</span>)</span><br><span class="line">print(flag2 <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">False</span>)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">True</span></span><br><span class="line"><span class="string">False</span></span><br><span class="line"><span class="string">False</span></span><br><span class="line"><span class="string">True</span></span><br><span class="line"><span class="string">False</span></span><br><span class="line"><span class="string">True</span></span><br><span class="line"><span class="string">False</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><h3 id="练习1-华氏度转摄氏度"><a href="#练习1-华氏度转摄氏度" class="headerlink" title="练习1: 华氏度转摄氏度"></a>练习1: 华氏度转摄氏度</h3><figure class="highlight py"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">F = 1.8C + 32</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">f = float(input(<span class="string">'请输入华氏温度: '</span>))</span><br><span class="line">c = (f - <span class="number">32</span>) / <span class="number">1.8</span></span><br><span class="line">print(<span class="string">'%.1f华氏度 = %.1f摄氏度'</span> % (f, c))</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="练习2-输入圆的半径计算圆的周长和面积"><a href="#练习2-输入圆的半径计算圆的周长和面积" class="headerlink" title="练习2: 输入圆的半径计算圆的周长和面积"></a>练习2: 输入圆的半径计算圆的周长和面积</h3><figure class="highlight py"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line">radius = float(input(<span class="string">'请输入圆的半径: '</span>))</span><br><span class="line">perimeter = <span class="number">2</span> * math.pi * radius</span><br><span class="line">area = math.pi * radius * radius</span><br><span class="line">print(<span class="string">'周长: %.2f'</span> % perimeter)</span><br><span class="line">print(<span class="string">'面积: %.2f'</span> % area)</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="练习3-输入年份判断是不是闰年"><a href="#练习3-输入年份判断是不是闰年" class="headerlink" title="练习3: 输入年份判断是不是闰年"></a>练习3: 输入年份判断是不是闰年</h3><figure class="highlight py"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果代码很长, 写成一行不方便阅读, 可以使用 \ 或 () 折行</span></span><br><span class="line">year = float(input(<span class="string">'请输入年份: '</span>))</span><br><span class="line">is_leap = (year % <span class="number">4</span> == <span class="number">0</span> <span class="keyword">and</span> year % <span class="number">100</span> != <span class="number">0</span> <span class="keyword">or</span> year % <span class="number">400</span> == <span class="number">0</span>)</span><br><span class="line">print(is_leap)</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充: %"></a>补充: %</h2><p>C 语言 % 后面都可以加什么字母, 分别表示什么意思</p>
+<blockquote>
+<ul>
+<li><code>%s</code> 格式对应字符串的输出，即如果使用 printf 函数输出字符串时，格式应采用 %s<br>% 后面可以跟的字母还有：</li>
+<li><code>％d</code> 整型输出，<code>％ld</code> 长整型输出</li>
+<li><code>％o</code> 以八进制数形式输出整数</li>
+<li><code>％x</code> 以十六进制数形式输出整数</li>
+<li><code>％u</code> 以十进制数输出unsigned型数据(无符号数)</li>
+<li><code>％c</code> 用来输出一个字符</li>
+<li><code>％f</code> 用来输出实数，以小数形式输出</li>
+<li><code>％e</code> 以指数形式输出实数</li>
+<li><code>％g</code> 根据大小自动选f格式或e格式，且不输出无意义的零</li>
+<li><code>%.n</code> 识别几位小数</li>
+</ul>
+</blockquote>
+<p>console.log 也适用</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:1966861494@qq.com">Edsyang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.lagerstroemia.com.cn/2020/02/20/server/Python/basic/python-2/">http://blog.lagerstroemia.com.cn/2020/02/20/server/Python/basic/python-2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.lagerstroemia.com.cn" target="_blank">Edsyang</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="/img/wechat.png" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="/img/alipay.png" alt="支付宝"/><div class="post-qr-code__desc">支付宝</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2020/02/20/server/Python/basic/python-3/"><img class="prev_cover" data-src="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">分支结构</div></div></a></div><div class="next-post pull_right"><a href="/2020/02/17/js/es6/extend/"><img class="next_cover" data-src="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">扩展</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var requestSetting = function (from,set) {
+  var from = from
+  var setting = set.split(',').filter(function(item){
+  return from.indexOf(item) > -1
+  });
+  setting = setting.length == 0 ? from :setting;
+  return setting
+}
+
+var guestInfo = requestSetting(['nick','mail','link'],'nick,mail,link')
+var requiredFields = requestSetting(['nick','mail','link'],'nick,mail')
+
+window.valine = new Valine({
+  el:'#vcomment',
+  appId: 'WgFk4Onl7sisfXpq9vHcehGJ-gzGzoHsz',
+  appKey: '3DLR7iLY5al5dbIdo9kWnDHU',
+  notify: false,
+  verify: false,
+  placeholder: 'Please leave your footprints',
+  avatar: 'monsterid',
+  meta: guestInfo,
+  pageSize: '10',
+  lang: 'en',
+  recordIP: false,
+  serverURLs: '',
+  emojiCDN: '',
+  emojiMaps: "",
+  enableQQ: true,
+  requiredFields: requiredFields
+});</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2020 By Edsyang</div><div class="framework-info"><span>Driven </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div><div class="icp"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener"><img class="icp-icon" src="/img/icp.png"/><span>冀ICP备19038398号</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="/js/third-party/canvas-nest.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/search/local-search.js"></script></body></html>

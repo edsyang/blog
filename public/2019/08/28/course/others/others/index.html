@@ -1,0 +1,303 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Others | Edsyang</title><meta name="description" content="项目开发流程 项目立项：宣布要做一个什么功能，讨论一下这个功能的可行性或者实现成本（严谨一点：可行性研究报告） 需求评审（如果项目不大，需求评审和项目立项一起完成）：由需求方（一般是产品经理）发起，组织设计的前端（FE）、后端（RD、BE）、测试（QA）、设计师（UI产品设计、UE用户体验）等开会。需求评审主要是讲述需求，讲述需求时还会解答大家对需求的疑惑；需求评审过后许产出无异议的产品需求文档（"><meta name="keywords" content="JS Notes"><meta name="author" content="Edsyang,1966861494@qq.com"><meta name="copyright" content="Edsyang"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.svg"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Others"><meta name="twitter:description" content="项目开发流程 项目立项：宣布要做一个什么功能，讨论一下这个功能的可行性或者实现成本（严谨一点：可行性研究报告） 需求评审（如果项目不大，需求评审和项目立项一起完成）：由需求方（一般是产品经理）发起，组织设计的前端（FE）、后端（RD、BE）、测试（QA）、设计师（UI产品设计、UE用户体验）等开会。需求评审主要是讲述需求，讲述需求时还会解答大家对需求的疑惑；需求评审过后许产出无异议的产品需求文档（"><meta name="twitter:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg"><meta property="og:type" content="article"><meta property="og:title" content="Others"><meta property="og:url" content="http://blog.lagerstroemia.com.cn/2019/08/28/course/others/others/"><meta property="og:site_name" content="Edsyang"><meta property="og:description" content="项目开发流程 项目立项：宣布要做一个什么功能，讨论一下这个功能的可行性或者实现成本（严谨一点：可行性研究报告） 需求评审（如果项目不大，需求评审和项目立项一起完成）：由需求方（一般是产品经理）发起，组织设计的前端（FE）、后端（RD、BE）、测试（QA）、设计师（UI产品设计、UE用户体验）等开会。需求评审主要是讲述需求，讲述需求时还会解答大家对需求的疑惑；需求评审过后许产出无异议的产品需求文档（"><meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg"><meta property="article:published_time" content="2019-08-28T01:35:00.901Z"><meta property="article:modified_time" content="2020-05-10T02:27:56.071Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://blog.lagerstroemia.com.cn/2019/08/28/course/others/others/"><link rel="prev" title="React - Chapter One.E" href="http://blog.lagerstroemia.com.cn/2019/09/01/course/react/14-React.js-E.part%20five/"><link rel="next" title="React - Chapter One.D" href="http://blog.lagerstroemia.com.cn/2019/08/17/course/react/14-React.js-D.part%20four/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: {"languages":{"author":"作者: Edsyang","link":"链接: ","source":"来源: Edsyang","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Edsyang" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">152</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">6</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">37</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#项目开发流程"><span class="toc-number">1.</span> <span class="toc-text">项目开发流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GIT-分支开发流程"><span class="toc-number">2.</span> <span class="toc-text">GIT 分支开发流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JS中常见的几种报错类型"><span class="toc-number">3.</span> <span class="toc-text">JS中常见的几种报错类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、SyntaxError（语法错误）"><span class="toc-number">3.1.</span> <span class="toc-text">1、SyntaxError（语法错误）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、ReferenceError（引用错误）"><span class="toc-number">3.2.</span> <span class="toc-text">2、ReferenceError（引用错误）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、RangeError（范围错误）"><span class="toc-number">3.3.</span> <span class="toc-text">3、RangeError（范围错误）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、TypeError（类型错误）"><span class="toc-number">3.4.</span> <span class="toc-text">4、TypeError（类型错误）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、URLError（URL错误）"><span class="toc-number">3.5.</span> <span class="toc-text">5、URLError（URL错误）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、EvalError（eval错误）"><span class="toc-number">3.6.</span> <span class="toc-text">6、EvalError（eval错误）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript中运算符的优先级"><span class="toc-number">4.</span> <span class="toc-text">JavaScript中运算符的优先级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#扫码登录"><span class="toc-number">5.</span> <span class="toc-text">扫码登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SEO"><span class="toc-number">6.</span> <span class="toc-text">SEO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#权限验证"><span class="toc-number">7.</span> <span class="toc-text">权限验证</span></a></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Edsyang</a></span><span class="pull_right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">Others</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2019-08-28 01:35:00"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2019-08-28</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-05-10 02:27:56"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-05-10</span></time></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="项目开发流程"><a href="#项目开发流程" class="headerlink" title="项目开发流程"></a>项目开发流程</h2><ol>
+<li>项目立项：宣布要做一个什么功能，讨论一下这个功能的可行性或者实现成本（严谨一点：可行性研究报告）</li>
+<li>需求评审（如果项目不大，需求评审和项目立项一起完成）：由需求方（一般是产品经理）发起，组织设计的前端（FE）、后端（RD、BE）、测试（QA）、设计师（UI产品设计、UE用户体验）等开会。需求评审主要是讲述需求，讲述需求时还会解答大家对需求的疑惑；需求评审过后许产出无异议的产品需求文档（PRD）</li>
+<li>需求确定后，前后端的开发开始技术调研，并且设计技术方案；在这个阶段如果用到了新技术，如地图、图表等，需要去学习调研新技术；而后端在做数据库表、接口的设计；设计师在制作设计稿</li>
+<li>设计稿评审：由产品发起，组织 FE、UI、UE、QA 参与，讨论设计稿的实现难度以及验收标准；如果前端觉得这个效果实现起来很困难可以和设计师讨论（比方说‘如果要按照这样的实际会需要很长时间’）（如果项目小或者没有这样的规定，一般就是 FE 和 UI 的碰头会），设计稿评审产出的是设计稿（toB 的产品一般没有设计稿）</li>
+<li>接口文档评审：由后端技术负责人发起，FE、QA 参与；目的是确定前后端交互的接口数量、前端传递的参数、接口返回值的数据结构、类型是否满足需求、其易用性如何；这一阶段，<strong>前端需要重点关注接口返回的数据是不是够，数据结构的易用性</strong>（在这个阶段如果有些接口过于复杂可以要求后端更改，拒绝更改问其理由，一向如此便是对么？），接口文档评审后会产出接口文档</li>
+<li>排期：设计稿和接口文档都已经确认后，这个阶段给出的排期是一个精确地排期；没有意外情况，这个排期不能随意更改（如果需求变更、设计稿变更，如果变更特别大，或者提出的变更时间比较晚，需要考虑是否重新排期）；预估时间要乘二（因为还有太多外界影响的因素）</li>
+<li>开发：排期结束之后进入开发阶段；如果需求比较紧急，每天早晚都会有站会（站着开个会）沟通进度</li>
+<li>自测 + 联调：因为开发的时候，前端用的是接口文档以及接口返回的假数据开发；而后端也看不到前端的界面，所以在最后双方都开发完以后进行联合调试；联调就是把前端和后端的代码都上线到一台开发服务器上，通过开发服务器访问已经开发的应用，然后测试主要流程。如果公司比较严谨，QA 会提供 P1 或者 P0 级别的 CASE（测试用例：是一种文档，上面描述了如何操作以及该操作应该出现的结果；如果操作过后没有出现对应的结果就是写的代码有 bug（不一定是谁的，需要查）），在联调阶段执行 P1 或者 P0 的 CASE 进行自测，这个过程成为冒烟测试</li>
+<li>提测：通过自测和联调后的代码提交给 QA，他们去验收功能，随着验收，如果出现 bug，要改</li>
+<li>灰度发布：把应用上线到和线上服务器环境很相似的一台服务器上，然后再走一遍测试流程，如果出现 bug 开发需要优先处理</li>
+<li>上线（发版）：把经过测试后的代码上线到为用户提供服务的服务器上，这个过程中需求方 和 QA 还会做线上验收；经过这一步后，外界的用户才能使用开发的功能</li>
+<li>复盘会：论功行赏，不求有功但求无过</li>
+</ol>
+<ul>
+<li>toB（to business 面向业务，如管理后台）</li>
+<li>toC（to customer 面向用户，如 APP 等）</li>
+</ul>
+<blockquote>
+<p>产品经理只是一个岗位，并不是管理岗<br>设计稿评审和接口文档评审不分先后，谁先完成谁先评审<br>上班有些事情一定要说出来，不说的话没人替你说出来<br>被开除不可怕，可怕的是找不到工作</p>
+</blockquote>
+<h2 id="GIT-分支开发流程"><a href="#GIT-分支开发流程" class="headerlink" title="GIT 分支开发流程"></a>GIT 分支开发流程</h2><blockquote>
+<p>不包含回滚的操作</p>
+</blockquote>
+<ol>
+<li>如果是大型项目一般是由项目负责人（一般是后端）开一个公共的开发分支（远程分支，本地分支需要自己开），例如 dev_0829；如果项目较小，自己开分支即可</li>
+<li>如果多人协作的项目，不要直接在公共开发分支上开发；而是基于公共开发分支再切一个个人开发分支，例如 dev_0829_mars</li>
+<li>开辟自己的开发分支后，在自己的分支上 add、commit</li>
+<li>等到开发结束后（也可以写一点自测的没问题就合并一点），把自己的开发分支上的代码合并到公共开发分支上，即：将 dev_0829_mars 合并到 dev_0829</li>
+<li>合并自己的分支到公共开发分支步骤</li>
+</ol>
+<ul>
+<li>1).将本地分支切换到公共开发分支上：<code>git checkout dev_0829</code></li>
+<li>2).同步远程公共开发分支上的代码：<code>git pull origin dev_0829</code></li>
+<li>3).把自己的开发分支合并到公共开发分支上：<code>git merge dev_0829_mars --no-ff</code>，esc，:q 退出即可</li>
+<li>4).如果有冲突，需要解决冲突；解决冲突后再 add、commit；然后 push 到远程公共分支上：<code>git push origin dev_0829</code></li>
+</ul>
+<ol start="6">
+<li>如果开发完成后要提测，需要将 master 上的代码同步到公共开发分支上：master -&gt; dev_0829</li>
+</ol>
+<ul>
+<li>1).本地切换到 master 分支上：<code>git checkout master</code></li>
+<li>2).同步远程 master 代码到本地 master：<code>git pull origin master</code></li>
+<li>3).切换到开发分支上：<code>git checkout dev_0829</code></li>
+<li>4).把 master 上的代码合并到开发分支：<code>git merge master --no-ff</code></li>
+<li>5).如果合并出现冲突，解决冲突，然后 add、commit；最后把代码 push 到远程开发分支上：<code>git push origin dev_0829</code></li>
+<li>6).此时提测，把分支发给 QA 或者写在提测文档上</li>
+</ul>
+<ol start="7">
+<li>如果在测试阶段出现 bug，我们需要修改 bug，（可以）直接在公共的开发分支上修改，然后 add、commit、pull、push</li>
+<li>上线：从提测到上线一般会间隔一段时间，上线前还需要在此同步 master 的代码到分支上；重复 6.1 - 6.5 的操作；经过这一步之后去 gitlab 上提交 merge request</li>
+<li>提交完 mr（merge request）以后找有权限的人合并；合并完之后执行上线流程</li>
+</ol>
+<h2 id="JS中常见的几种报错类型"><a href="#JS中常见的几种报错类型" class="headerlink" title="JS中常见的几种报错类型"></a>JS中常见的几种报错类型</h2><h3 id="1、SyntaxError（语法错误）"><a href="#1、SyntaxError（语法错误）" class="headerlink" title="1、SyntaxError（语法错误）"></a>1、SyntaxError（语法错误）</h3><p>解析代码时发生的语法错误</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="number">1</span>a;   <span class="comment">// Uncaught SyntaxError: Invalid or unexpected token 变量名错误 </span></span><br><span class="line"><span class="built_in">console</span>.log <span class="string">'hello'</span>);  <span class="comment">// Uncaught SyntaxError: Unexpected string 缺少括号</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="2、ReferenceError（引用错误）"><a href="#2、ReferenceError（引用错误）" class="headerlink" title="2、ReferenceError（引用错误）"></a>2、ReferenceError（引用错误）</h3><figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a);  <span class="comment">// Uncaught ReferenceError: a is not defined 引用了一个不存在的变量</span></span><br><span class="line"><span class="built_in">console</span>.log()= <span class="number">1</span>;  <span class="comment">// Uncaught ReferenceError: Invalid left-hand side in assignment 将变量赋值给一个无法被赋值的对象</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="3、RangeError（范围错误）"><a href="#3、RangeError（范围错误）" class="headerlink" title="3、RangeError（范围错误）"></a>3、RangeError（范围错误）</h3><figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">-1</span>);  <span class="comment">// Uncaught RangeError: Invalid array length 超出有效范围</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="4、TypeError（类型错误）"><a href="#4、TypeError（类型错误）" class="headerlink" title="4、TypeError（类型错误）"></a>4、TypeError（类型错误）</h3><p>变量或参数不是预期类型，比如，对字符串、布尔值、数值等原始类型的值使用new命令，就会抛出这种错误，因为new命令的参数应该是一个构造函数。</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> <span class="number">123</span>;  <span class="comment">// Uncaught TypeError: 123 is not a function</span></span><br></pre></td></tr></tbody></table></figure>
+<p>调用对象不存在的方法</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a;</span><br><span class="line">a.aa();  <span class="comment">// Uncaught TypeError: Cannot read property 'aa' of undefined</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="5、URLError（URL错误）"><a href="#5、URLError（URL错误）" class="headerlink" title="5、URLError（URL错误）"></a>5、URLError（URL错误）</h3><p>与url相关函数参数不正确，主要是encodeURI()、decodeURI()、encodeURIComponent()、decodeURIComponent()、escape()和unescape()这六个函数。</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">decodeURI</span>(<span class="string">'%2'</span>)  <span class="comment">// Uncaught URIError: URI malformed</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="6、EvalError（eval错误）"><a href="#6、EvalError（eval错误）" class="headerlink" title="6、EvalError（eval错误）"></a>6、EvalError（eval错误）</h3><p>eval函数没有被正确执行</p>
+<h2 id="JavaScript中运算符的优先级"><a href="#JavaScript中运算符的优先级" class="headerlink" title="JavaScript中运算符的优先级"></a>JavaScript中运算符的优先级</h2><pre><code>从最高到最低的优先级列出JavaScript运算符。具有相同优先级的运算符按从左至右的顺序求值。</code></pre><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>[]</code> <code>()</code></td>
+<td>字段访问、数组下标、函数调用以及表达式分组</td>
+</tr>
+<tr>
+<td><code>++</code> <code>--</code> <code>-</code> <code>~</code> <code>!</code> <code>delete</code> <code>new</code> <code>typeof</code> <code>void</code></td>
+<td>一元运算符、返回数据类型、对象创建、未定义值</td>
+</tr>
+<tr>
+<td><code>*</code> <code>/</code> <code>%</code></td>
+<td>乘法、除法、取模</td>
+</tr>
+<tr>
+<td><code>+</code> <code>-</code> <code>+</code></td>
+<td>加法、减法、字符串连接</td>
+</tr>
+<tr>
+<td><code>&lt;&lt;</code> <code>&gt;&gt;</code> <code>&gt;&gt;&gt;</code></td>
+<td>移位</td>
+</tr>
+<tr>
+<td><code>&lt;</code> <code>&lt;=</code> <code>&gt;</code> <code>&gt;=</code> <code>instanceof</code></td>
+<td>小于、小于等于、大于、大于等于、instanceof</td>
+</tr>
+<tr>
+<td><code>==</code>  <code>!=</code> <code>===</code> <code>!==</code></td>
+<td>等于、不等于、严格相等、非严格相等</td>
+</tr>
+<tr>
+<td><code>&amp;</code></td>
+<td>按位与</td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>按位异或</td>
+</tr>
+<tr>
+<td>`</td>
+<td>`</td>
+</tr>
+<tr>
+<td><code>&amp;&amp;</code></td>
+<td>逻辑与</td>
+</tr>
+<tr>
+<td>`</td>
+<td></td>
+</tr>
+<tr>
+<td><code>?:</code></td>
+<td>条件</td>
+</tr>
+<tr>
+<td><code>=</code> <code>oP=</code></td>
+<td>赋值、运算赋值</td>
+</tr>
+<tr>
+<td><code>,</code></td>
+<td>多重求值</td>
+</tr>
+</tbody></table>
+<h2 id="扫码登录"><a href="#扫码登录" class="headerlink" title="扫码登录"></a>扫码登录</h2><ul>
+<li>以微信扫描网易云笔记为例</li>
+</ul>
+<ol>
+<li>首先生成一张二维码，二维码就是一个 url 这个，这个 url 是微信服务器上的用户扫码登录的接口，url中有一个 app-id</li>
+<li>生成二维码以后，在网页中开启一个定时器，每隔一定时间就去请求一个接口，询问扫描状态和登录状态</li>
+<li>使用 微信 扫描二维码，就是通过微信内置的浏览器请求这个url，请求这个url时会把 app-id 传递给微信服务器，微信服务器收到以后校验 app-id 是否有效</li>
+<li>在此之前，需要网易家的后端接通微信后端的的二维码登录，如果 app-id 有效，微信家的服务器将会请求网易家的服务器的接口，并且把扫描该二维码的微信用户的部分信息，如 app-id、微信头像 传递给网易，当网易服务器收到微信服务器的请求后，把微信服务器传递过来的微信用户信息保存到 session 或者其他数据缓存媒介中，此时扫描该二维码的微信用户就处于登录状态；</li>
+<li>在上面过程进行的同时，浏览器那个请求扫描状态的接口一直在询问服务器，当上面第 4 步完成后的下一次询问，此时服务器上的该 app-id 已经有了对应的登录信息，此时接口就会返回这些登录信息；前端拿到这些信息后，把对应的页面渲染成登录后的状态即可</li>
+</ol>
+<h2 id="SEO"><a href="#SEO" class="headerlink" title="SEO"></a>SEO</h2><ol>
+<li>设置 TDK<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=<span class="string">'description'</span> content=<span class="string">"这是TDK的D"</span>&gt;</span><br><span class="line">&lt;meta name=<span class="string">'keywords'</span> content=<span class="string">"这是TDK的K"</span>&gt;</span><br><span class="line">&lt;title&gt;SEO的标题&lt;<span class="regexp">/title&gt;</span></span><br></pre></td></tr></tbody></table></figure></li>
+<li>标签语意化</li>
+<li>希望爬虫抓取的内容不要用 AJAX</li>
+<li>单页面应用不利于 SEO</li>
+</ol>
+<h2 id="权限验证"><a href="#权限验证" class="headerlink" title="权限验证"></a>权限验证</h2><p>原理：导航守卫 + 条件渲染</p>
+<ul>
+<li>页面级的权限验证：<br>Vue 中结合全局的导航守卫和路由元信息（router 中的 meta 属性）来判断（比较粗犷），有权限就放行（next()），没有权限就直接拦截下来（next(false)），在页面中的 router-link 中加一个 v-if条件渲染（根据用户权限做判断，有权限的出现，没有去权限的就消失）<blockquote>
+<p>如果精细一点的话使用独享的导航守卫，将每一个都细化</p>
+</blockquote>
+</li>
+</ul>
+<p>权限的实现：</p>
+<ol>
+<li>获取权限，将权限保存到 store 和 ls 中</li>
+<li>用权限的时候<ol>
+<li>如果是页面权限：使用导航守卫（如果是 Vue 使用 meta（路由元）保存权限信息，在导航守卫中验证；如果是 React 需要使用 Protected.js 来验证）</li>
+<li>如果是页面元素的权限：需要根据 store 中的权限做条件渲染（Vue 中使用 v-if；如果是 React 中使用条件渲染（条件语句/表达式））</li>
+</ol>
+</li>
+</ol>
+<p>Vue 的事件元：<a href="https://router.vuejs.org/zh/guide/advanced/meta.html" target="_blank" rel="noopener">https://router.vuejs.org/zh/guide/advanced/meta.html</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:1966861494@qq.com">Edsyang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.lagerstroemia.com.cn/2019/08/28/course/others/others/">http://blog.lagerstroemia.com.cn/2019/08/28/course/others/others/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.lagerstroemia.com.cn" target="_blank">Edsyang</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JS-Notes/">JS Notes</a></div><div class="post_share"><div class="social-share" data-image="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="/img/wechat.png" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="/img/alipay.png" alt="支付宝"/><div class="post-qr-code__desc">支付宝</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2019/09/01/course/react/14-React.js-E.part%20five/"><img class="prev_cover" data-src="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">React - Chapter One.E</div></div></a></div><div class="next-post pull_right"><a href="/2019/08/17/course/react/14-React.js-D.part%20four/"><img class="next_cover" data-src="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">React - Chapter One.D</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/01/17/course/read/" title="阅读指南"><img class="relatedPosts_cover" data-src="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-01-16</div><div class="relatedPosts_title">阅读指南</div></div></a></div><div class="relatedPosts_item"><a href="/2019/09/07/course/applets/applets/" title="微信小程序"><img class="relatedPosts_cover" data-src="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2019-09-07</div><div class="relatedPosts_title">微信小程序</div></div></a></div><div class="relatedPosts_item"><a href="/2019/07/20/course/network/11-HTTP&AJAX-B.part two/" title="网络 - Chapter One.B"><img class="relatedPosts_cover" data-src="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2019-07-20</div><div class="relatedPosts_title">网络 - Chapter One.B</div></div></a></div><div class="relatedPosts_item"><a href="/2019/07/20/course/mobile/10-Mobile Terminal-A.part one/" title="移动端 - Chapter One.A"><img class="relatedPosts_cover" data-src="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2019-07-20</div><div class="relatedPosts_title">移动端 - Chapter One.A</div></div></a></div><div class="relatedPosts_item"><a href="/2019/07/20/course/network/11-HTTP&AJAX-A.part one/" title="网络 - Chapter One.A"><img class="relatedPosts_cover" data-src="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2019-07-20</div><div class="relatedPosts_title">网络 - Chapter One.A</div></div></a></div><div class="relatedPosts_item"><a href="/2019/07/20/course/node/12-Node.js-B.part two/" title="Node - Chapter One.B"><img class="relatedPosts_cover" data-src="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2019-07-20</div><div class="relatedPosts_title">Node - Chapter One.B</div></div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var requestSetting = function (from,set) {
+  var from = from
+  var setting = set.split(',').filter(function(item){
+  return from.indexOf(item) > -1
+  });
+  setting = setting.length == 0 ? from :setting;
+  return setting
+}
+
+var guestInfo = requestSetting(['nick','mail','link'],'nick,mail,link')
+var requiredFields = requestSetting(['nick','mail','link'],'nick,mail')
+
+window.valine = new Valine({
+  el:'#vcomment',
+  appId: 'WgFk4Onl7sisfXpq9vHcehGJ-gzGzoHsz',
+  appKey: '3DLR7iLY5al5dbIdo9kWnDHU',
+  notify: false,
+  verify: false,
+  placeholder: 'Please leave your footprints',
+  avatar: 'monsterid',
+  meta: guestInfo,
+  pageSize: '10',
+  lang: 'en',
+  recordIP: false,
+  serverURLs: '',
+  emojiCDN: '',
+  emojiMaps: "",
+  enableQQ: true,
+  requiredFields: requiredFields
+});</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2020 By Edsyang</div><div class="framework-info"><span>Driven </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div><div class="icp"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener"><img class="icp-icon" src="/img/icp.png"/><span>冀ICP备19038398号</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="/js/third-party/canvas-nest.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/search/local-search.js"></script></body></html>

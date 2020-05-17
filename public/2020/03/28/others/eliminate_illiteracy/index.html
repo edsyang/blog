@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>扫盲贴 | Edsyang</title><meta name="description" content="package.json 中的版本前缀 波浪符号 ~: 把当前库的版本更新到当前 minor version(中间的数字)中最新的版本 插入符号 ^: 把当前库的版本更新到当前 major version(第一位数字)中最新的版本  WIPwork in progress -&gt; doing&#x2F;todo PRpull request 当你想更正别人仓库里的错误时, 要走一个流程：  先 fork"><meta name="keywords" content="Personal blog about font-end technology &amp; record others"><meta name="author" content="Edsyang,1966861494@qq.com"><meta name="copyright" content="Edsyang"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.svg"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="扫盲贴"><meta name="twitter:description" content="package.json 中的版本前缀 波浪符号 ~: 把当前库的版本更新到当前 minor version(中间的数字)中最新的版本 插入符号 ^: 把当前库的版本更新到当前 major version(第一位数字)中最新的版本  WIPwork in progress -&gt; doing&#x2F;todo PRpull request 当你想更正别人仓库里的错误时, 要走一个流程：  先 fork"><meta name="twitter:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg"><meta property="og:type" content="article"><meta property="og:title" content="扫盲贴"><meta property="og:url" content="http://blog.lagerstroemia.com.cn/2020/03/28/others/eliminate_illiteracy/"><meta property="og:site_name" content="Edsyang"><meta property="og:description" content="package.json 中的版本前缀 波浪符号 ~: 把当前库的版本更新到当前 minor version(中间的数字)中最新的版本 插入符号 ^: 把当前库的版本更新到当前 major version(第一位数字)中最新的版本  WIPwork in progress -&gt; doing&#x2F;todo PRpull request 当你想更正别人仓库里的错误时, 要走一个流程：  先 fork"><meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg"><meta property="article:published_time" content="2020-03-28T14:50:33.752Z"><meta property="article:modified_time" content="2020-05-03T03:12:14.553Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://blog.lagerstroemia.com.cn/2020/03/28/others/eliminate_illiteracy/"><link rel="prev" title="Recept" href="http://blog.lagerstroemia.com.cn/2020/03/29/useful/outofcode/recept/"><link rel="next" title="话外篇 - 关于学习" href="http://blog.lagerstroemia.com.cn/2020/03/27/useful/outofcode/aboutlearn/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: {"languages":{"author":"作者: Edsyang","link":"链接: ","source":"来源: Edsyang","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Edsyang" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">152</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">6</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">37</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#package-json-中的版本前缀"><span class="toc-number">1.</span> <span class="toc-text">package.json 中的版本前缀</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WIP"><span class="toc-number">2.</span> <span class="toc-text">WIP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PR"><span class="toc-number">3.</span> <span class="toc-text">PR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SDK-API-DLL"><span class="toc-number">4.</span> <span class="toc-text">SDK &#x2F; API &#x2F; DLL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Schema"><span class="toc-number">5.</span> <span class="toc-text">Schema</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CI-CD"><span class="toc-number">6.</span> <span class="toc-text">CI&#x2F;CD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IaaS-amp-PaaS-amp-SaaS"><span class="toc-number">7.</span> <span class="toc-text">IaaS &amp; PaaS &amp; SaaS</span></a></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Edsyang</a></span><span class="pull_right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">扫盲贴</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-03-28 14:50:33"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-03-28</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-05-03 03:12:14"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-05-03</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Others/">Others</a><i class="fa fa-angle-right post-meta__separator" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Others/eliminate-illiteracy/">eliminate_illiteracy</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="package-json-中的版本前缀"><a href="#package-json-中的版本前缀" class="headerlink" title="package.json 中的版本前缀"></a>package.json 中的版本前缀</h2><ul>
+<li>波浪符号 <code>~</code>: 把当前库的版本更新到当前 minor version(中间的数字)中最新的版本</li>
+<li>插入符号 <code>^</code>: 把当前库的版本更新到当前 major version(第一位数字)中最新的版本</li>
+</ul>
+<h2 id="WIP"><a href="#WIP" class="headerlink" title="WIP"></a>WIP</h2><p>work in progress -&gt; doing/todo</p>
+<h2 id="PR"><a href="#PR" class="headerlink" title="PR"></a>PR</h2><p>pull request</p>
+<p>当你想更正别人仓库里的错误时, 要走一个流程：</p>
+<ol>
+<li>先 fork 别人的仓库, 相当于拷贝一份</li>
+<li>clone 到本地分支, 做一些 bug fix</li>
+<li>发起 pull request 给原仓库, 让他看到你修改的 bug</li>
+<li>原仓库 review 这个 bug, 如果是正确的话, 就会 merge 到他自己的项目中</li>
+</ol>
+<p>至此, 整个 pull request 的过程就结束了</p>
+<h2 id="SDK-API-DLL"><a href="#SDK-API-DLL" class="headerlink" title="SDK / API / DLL"></a>SDK / API / DLL</h2><ul>
+<li>SDK(software development kit) 软件开发工具包</li>
+<li>API(application programming interface) 应用程序编程接口</li>
+<li>DDL(Dynamic Link Library) 动态链接库</li>
+</ul>
+<p><strong>SDK</strong></p>
+<p>SDK 一般是指软件工程师为特定的软件包、软件框架、硬件平台、操作系统等建立应用程序是开发的合集(相关文档、规范、工具、API); 通俗来讲就是<strong>第三方服务商提供的实现产品某项功能的工具包</strong></p>
+<ul>
+<li>场景一: 老板让做一个中后台管理系统, 但是我觉得时间太长了, 不利于开发上线, 偶然间看到了某大厂平台上有相关功能, 于是我可以在基于平台的 SDK 下, 调用该平台的 API, 就可以访问平台的资源和数据</li>
+<li>场景二: 需要做一个 APP, 其中包含6个功能, 首先要做1-6的 API, 组成 SDK, 然后根据 SDK 开发 Project File 项目文件, 制作 APP, 如果后续需要加新的功能, 将新功能的 API 做好后, 组成新的 SDL, 生成新的 Firmware</li>
+</ul>
+<p>还有一个粗暴的解释:</p>
+<p>你是一男的, 要开发一个 baby, SDK 就是房间、床、老婆等一系列相关的工具、文档; API 就是老婆开放的接口; API 固然重要, 但如果想有一个优质的体验, 就需要将 SDK 做好</p>
+<h2 id="Schema"><a href="#Schema" class="headerlink" title="Schema"></a>Schema</h2><p>数据库对象的集合, 这个集合包含了各种对象如: 表、视图、存储过程、索引等; 为了区分不同的集合, 就需要给不同的集合起不同的名字, 默认情况下一个用户对应一个集合, 用户的 schema 名等于用户名</p>
+<p>如果把 database 看作是一个仓库, 仓库很多房间（schema）, 一个 schema 代表一个房间, table 可以看作是每个房间中的储物柜, user 是每个 schema 的主人, 有操作数据库中每个房间的权利, 就是说每个数据库映射的 user 有每个schema（房间）的钥匙</p>
+<h2 id="CI-CD"><a href="#CI-CD" class="headerlink" title="CI/CD"></a>CI/CD</h2><ul>
+<li>CI (Continuous Integration) 持续集成<ul>
+<li>当开发每天会提交多次代码到主干上, 会做一些重复性的动作时, 就可以用持续集成环境来操作</li>
+</ul>
+</li>
+<li>CD (Continuous Deployment) 持续部署<ul>
+<li>CD 还有一个小号, 也叫 CD (Continuous delivery)</li>
+</ul>
+</li>
+</ul>
+<p>CI/CD 的优点是重复的工作用自动化来代替、减少时间成本、版本发布时间减短了</p>
+<blockquote>
+<p>Jenkins 就是一个持续集成的工具, 基于 java 语言的开源工具</p>
+</blockquote>
+<h2 id="IaaS-amp-PaaS-amp-SaaS"><a href="#IaaS-amp-PaaS-amp-SaaS" class="headerlink" title="IaaS &amp; PaaS &amp; SaaS"></a>IaaS &amp; PaaS &amp; SaaS</h2><ol>
+<li><strong>IaaS (Infrastructure as a Service), 基础设施即服务</strong>; 把计算基础(服务器、网络技术、存储和数据中心空间)作为一项服务提供给客户, 它也包括提供操作系统和虚拟化技术、来管理资源, 消费者通过 Internet 可以从完善的计算机基础设施获得服务<blockquote>
+<p>云服务的最底层, 主要提供一些基础资源, 用户需要自己控制底层, 实现基础设施的使用逻辑; 如 Amazon EC2、Digital Ocean、RackSpace Cloud</p>
+</blockquote>
+</li>
+<li><strong>PaaS (Platform as a Service), 平台即服务</strong>; 把服务器平台作为一种服务提供的商业模式, 一个作为软件开发和运行环境的整套解决方案, 即以 SaaS 的模式提交给用户, 因此, PaaS 也是 SaaS 模式的一种应用, 但是, PaaS 的出现可以加快 SaaS 的发展，尤其是加快 SaaS 应用的开发速度<blockquote>
+<p><strong>提供软件部署平台(runtime), 抽象掉硬件和操作系统细节, 可以无缝扩展(scaling), 开发者只需要关注自己的业务逻辑, 不需要关注底层</strong>; 如 Heroku、Google App Engine、OpenShift</p>
+</blockquote>
+</li>
+<li><strong>SaaS (Software as a Service), 软件即服务</strong>; 一种交付模式, 其中应用作为一项服务托管, 通过 Internet 提供给用户, 帮助客户更好地管理它们的 IT 项目和服务、确保它们 IT 应用的质量和性能, 监控它们的在线业务<blockquote>
+<p><strong>软件的开发、管理、部署都交给第三方, 不用关心技术问题, 拿来即用</strong>; 如客户管理服务、团队协同服务、储存服务、存储服务、社交服务</p>
+</blockquote>
+</li>
+</ol>
+<p><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="https://tva1.sinaimg.cn/large/007S8ZIlly1gdsje57rurj30ai08dq39.jpg" alt=""></p>
+<p><strong><em>举个栗子</em></strong></p>
+<p>假设一个人想做披萨生意, 可以从头到尾自己生产, 但是这样比较麻烦, 需要准备的东西比较多, 因此决定外包一部分工作, 采用他人的服务, 现在有三个方案:</p>
+<ol>
+<li>「<strong>IaaS</strong>」他人提供厨房、煤气、炉子, 你使用这些基础设施来烤披萨</li>
+<li>「<strong>PaaS</strong>」除了基础设施, 他人还提供披萨饼皮, 只要把自己的配料放到饼皮上, 让他帮你烤出来就行了; 也就是说你要做的就是设计披萨的味道, 他人提供平台服务, 让你把自己的设计实现</li>
+<li>「<strong>SaaS</strong>」他人直接做好披萨, 不用你介入, 到手的就是一个成品, 你要做的就是把它卖出去, 最多在包装一下, 印上自己的 Logo</li>
+</ol>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:1966861494@qq.com">Edsyang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.lagerstroemia.com.cn/2020/03/28/others/eliminate_illiteracy/">http://blog.lagerstroemia.com.cn/2020/03/28/others/eliminate_illiteracy/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.lagerstroemia.com.cn" target="_blank">Edsyang</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="/img/wechat.png" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="/img/alipay.png" alt="支付宝"/><div class="post-qr-code__desc">支付宝</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2020/03/29/useful/outofcode/recept/"><img class="prev_cover" data-src="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Recept</div></div></a></div><div class="next-post pull_right"><a href="/2020/03/27/useful/outofcode/aboutlearn/"><img class="next_cover" data-src="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">话外篇 - 关于学习</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var requestSetting = function (from,set) {
+  var from = from
+  var setting = set.split(',').filter(function(item){
+  return from.indexOf(item) > -1
+  });
+  setting = setting.length == 0 ? from :setting;
+  return setting
+}
+
+var guestInfo = requestSetting(['nick','mail','link'],'nick,mail,link')
+var requiredFields = requestSetting(['nick','mail','link'],'nick,mail')
+
+window.valine = new Valine({
+  el:'#vcomment',
+  appId: 'WgFk4Onl7sisfXpq9vHcehGJ-gzGzoHsz',
+  appKey: '3DLR7iLY5al5dbIdo9kWnDHU',
+  notify: false,
+  verify: false,
+  placeholder: 'Please leave your footprints',
+  avatar: 'monsterid',
+  meta: guestInfo,
+  pageSize: '10',
+  lang: 'en',
+  recordIP: false,
+  serverURLs: '',
+  emojiCDN: '',
+  emojiMaps: "",
+  enableQQ: true,
+  requiredFields: requiredFields
+});</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2020 By Edsyang</div><div class="framework-info"><span>Driven </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div><div class="icp"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener"><img class="icp-icon" src="/img/icp.png"/><span>冀ICP备19038398号</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="/js/third-party/canvas-nest.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/search/local-search.js"></script></body></html>

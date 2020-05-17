@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>M5: AJAX / 同源 / 跨域 | Edsyang</title><meta name="description" content="AJAX「Asynchronous Javascript And XML」 异步的 javascript 和 XML; 是一种浏览器技术  XML: 可扩展标记语言, 像 html 一样有层级, 并且可以自定义标签; 为了让数据有结构, 早年间使用的都是XML 现在绝大多数公司都用 JSON, JSON 也可以清晰的表示数据结构   JSON: 是一种数据格式; 有 JSON 格式的对象, JSO"><meta name="keywords" content="Personal blog about font-end technology &amp; record others"><meta name="author" content="Edsyang,1966861494@qq.com"><meta name="copyright" content="Edsyang"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.svg"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="M5: AJAX / 同源 / 跨域"><meta name="twitter:description" content="AJAX「Asynchronous Javascript And XML」 异步的 javascript 和 XML; 是一种浏览器技术  XML: 可扩展标记语言, 像 html 一样有层级, 并且可以自定义标签; 为了让数据有结构, 早年间使用的都是XML 现在绝大多数公司都用 JSON, JSON 也可以清晰的表示数据结构   JSON: 是一种数据格式; 有 JSON 格式的对象, JSO"><meta name="twitter:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg"><meta property="og:type" content="article"><meta property="og:title" content="M5: AJAX / 同源 / 跨域"><meta property="og:url" content="http://blog.lagerstroemia.com.cn/2020/02/17/js/mount/m5/"><meta property="og:site_name" content="Edsyang"><meta property="og:description" content="AJAX「Asynchronous Javascript And XML」 异步的 javascript 和 XML; 是一种浏览器技术  XML: 可扩展标记语言, 像 html 一样有层级, 并且可以自定义标签; 为了让数据有结构, 早年间使用的都是XML 现在绝大多数公司都用 JSON, JSON 也可以清晰的表示数据结构   JSON: 是一种数据格式; 有 JSON 格式的对象, JSO"><meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg"><meta property="article:published_time" content="2020-02-17T14:17:06.374Z"><meta property="article:modified_time" content="2020-05-03T03:09:43.843Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://blog.lagerstroemia.com.cn/2020/02/17/js/mount/m5/"><link rel="prev" title="M6: TCP 协议 / 状态码 / http 通信三握四挥" href="http://blog.lagerstroemia.com.cn/2020/02/17/js/mount/m6/"><link rel="next" title="M4: 设计模式" href="http://blog.lagerstroemia.com.cn/2020/02/17/js/mount/m4/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: {"languages":{"author":"作者: Edsyang","link":"链接: ","source":"来源: Edsyang","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Edsyang" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">152</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">6</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">37</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#AJAX"><span class="toc-number">1.</span> <span class="toc-text">AJAX</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AJAX-同异步"><span class="toc-number">1.1.</span> <span class="toc-text">AJAX 同异步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http-method"><span class="toc-number">1.2.</span> <span class="toc-text">http-method</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jQuery-的-AJAX"><span class="toc-number">1.3.</span> <span class="toc-text">jQuery 的 AJAX</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#同源策略（Same-origin-Policy）"><span class="toc-number">2.</span> <span class="toc-text">同源策略（Same-origin Policy）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨域"><span class="toc-number">3.</span> <span class="toc-text">跨域</span></a></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Edsyang</a></span><span class="pull_right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">M5: AJAX / 同源 / 跨域</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-02-17 14:17:06"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-02-17</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-05-03 03:09:43"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-05-03</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/JS/">JS</a><i class="fa fa-angle-right post-meta__separator" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/JS/JS-%E4%B8%AD%E7%9A%84%E2%80%9C%E5%85%AD%E5%BA%A7%E5%A4%A7%E5%B1%B1%E2%80%9D/">JS 中的“六座大山”</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><p>「Asynchronous Javascript And XML」 异步的 javascript 和 XML; 是一种浏览器技术</p>
+<ul>
+<li>XML: 可扩展标记语言, 像 html 一样有层级, 并且可以自定义标签; 为了让数据有结构, 早年间使用的都是XML<blockquote>
+<p>现在绝大多数公司都用 JSON, JSON 也可以清晰的表示数据结构</p>
+</blockquote>
+</li>
+<li>JSON: 是一种数据格式; 有 JSON 格式的对象, JSON 格式的字符串<ul>
+<li><code>JSON.parse()</code> 把 JSON 格式的字符串转成对象</li>
+<li><code>JSON.stringify()</code> 把对象转成 JSON 格式的字符串</li>
+<li><code>JSON.parse(JSON.stringify(对象))</code> 可以深克隆对象</li>
+</ul>
+</li>
+<li>AJAX四步</li>
+</ul>
+<ol>
+<li>创建 AJAX 实例对象</li>
+<li>调用 AJAX 对象的 open 方法配置请求信息<ul>
+<li>HTTP method 请求方式: get/post/put/delete/options…</li>
+<li>url: 请求的服务端的接口地址</li>
+<li>同步/异步: false 表示同步, true 表示异步</li>
+</ul>
+</li>
+<li>监听 xhr 的 onreadystatechange 事件「异步的时候, readyState 发生变化会触发 readystatechange 事件; 所以每次变化都会触发一次, 但只有等于4时才有意义; 同步的时候只有为4时才触发」<ul>
+<li>readyState: 表示当前 AJAX 实例所处状态的一个数字, 每一个数字代表不同状态<ul>
+<li>0: 创建一个 AJAX 实例成功</li>
+<li>1: 已经调用过 open 方法, 打开了路径</li>
+<li>2: 表示客户端已经接收到服务的响应头（如果只要响应头可以在 readyState 为2时获取就行）</li>
+<li>3: 表示客户端正在接收响应体</li>
+<li>4: 表示响应体中的数据已经全部接收完毕</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>发送AJAX请求「send 是可以传参的, 传递的参数会写到请求体中」<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.open(<span class="string">'GET'</span>, <span class="string">'./data.json'</span>, <span class="literal">false</span>);</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{</span><br><span class="line">  <span class="keyword">if</span>(xhr.readyState === <span class="number">4</span> &amp;&amp; xhr.status === <span class="number">200</span>) {</span><br><span class="line">    <span class="keyword">let</span> data = <span class="built_in">JSON</span>.parse(xhr.responseText);</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line">xhr.send();</span><br></pre></td></tr></tbody></table></figure>
+
+</li>
+</ol>
+<h3 id="AJAX-同异步"><a href="#AJAX-同异步" class="headerlink" title="AJAX 同异步"></a>AJAX 同异步</h3><ul>
+<li><strong>同步</strong>: 阻塞的, 前一个执行不完, 后一个不能开始</li>
+<li><strong>异步</strong>: 非阻塞的, 后面的执行不用等前面的执行完（异步任务放到等待任务队列中, 等待任务队列中的任务谁先达到执行条件谁先执行）<blockquote>
+<p>真实项目中用异步的偏多, 但当这些接口互相依赖时, 代码组织起来会比较麻烦, 如有两个接口, 第二个接口依赖于第一个接口</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>异步的AJAX解决方案</strong></p>
+<ul>
+<li>使用回调函数解决, 创建函数, 实参需要传函数</li>
+<li>思想: 异步的 AJAX 获取的数据, 在同步任务中是无法获取的, 而回调函数又可以异步执行, 所以把拿到的数据以后的操作放到一个函数(bindHTML)中, 把这个函数传给 AJAX 方法, 此时 bindHTML 就成为 AJAX 的回调函数, AJAX 就可以在请求结束后调用回调函数</li>
+</ul>
+<p><strong>Promise 处理 AJAX 请求数据</strong></p>
+<ul>
+<li>把异步的处理写在 new Promise() 时的回调函数中; 如果异步处理成功, 执行 resolve(), 如果异步处理失败, 执行 reject()</li>
+<li>把异步处理成功以后要做的事情写在 then 方法的第一个参数里面, 把异步处理失败以后要做的事情写在 then 方法的第二个参数里面</li>
+<li>为什么要使用异步的 AJAX？<ul>
+<li>如果页面只有一个 AJAX 请求, 异步和同步没有太大区别, 就是代码组织顺序不同</li>
+<li>如果页面中由多个 AJAX 请求使用同步, 导致后面的 AJAX 必须等着前一个 AJAX 结束才能开始下一个, 导致用户等待 AJAX 响应的时间会累加; 如果使用异步, 后面的 AJAX 不同等上一个 AJAX 完成就可以开始请求下一个「注意: 一般一个页面中同时发起的 AJAX 请求不要超过6个」</li>
+</ul>
+</li>
+</ul>
+<h3 id="http-method"><a href="#http-method" class="headerlink" title="http-method"></a>http-method</h3><ul>
+<li>GET: 一般用于从服务器获取数据, 但也可以向服务器传递/发送少量的数据「通过问号传参」</li>
+<li>POST: 一般用于把数据传递给服务器或需要传递大量数据「通过请求体」</li>
+<li>PUT: 修改某些内容</li>
+<li>DELETE: 从服务器上删除数据</li>
+<li>HEAD: 只获取响应头, 不需要响应体</li>
+<li>OPTIONS: 查询服务器支持的 HTTP 请求方式</li>
+<li>TRACE: 回显请求的内容, 一般用于测试</li>
+<li>PATCH: 对 PUT 的补充, 用于修改某些内容</li>
+</ul>
+<h3 id="jQuery-的-AJAX"><a href="#jQuery-的-AJAX" class="headerlink" title="jQuery 的 AJAX"></a>jQuery 的 AJAX</h3><figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$.ajax({</span><br><span class="line">  url: <span class="string">'banner.json'</span>, <span class="comment">// 请求路径</span></span><br><span class="line">  type: <span class="string">'GET'</span>, <span class="comment">// 请求方式</span></span><br><span class="line">  dataType: <span class="string">'json'</span>, <span class="comment">// 数据类型</span></span><br><span class="line">  <span class="keyword">catch</span>: <span class="literal">false</span>, <span class="comment">// catch是否缓存, 一般设为false, 表示不要走缓存</span></span><br><span class="line">  data: {}, <span class="comment">// POST请求时传递数据, 会放到请求体中</span></span><br><span class="line">  <span class="keyword">async</span>: <span class="literal">true</span>, <span class="comment">// 同步还是异步, 默认是true表示异步</span></span><br><span class="line">  error(err){</span><br><span class="line">    <span class="comment">// ajax请求失败时执行的回调, 参数是具体的报错信息</span></span><br><span class="line">  },</span><br><span class="line">  success(data){</span><br><span class="line">    <span class="comment">// ajax请求成功时执行的回调, 参数是服务端返回的数据</span></span><br><span class="line">  }</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="同源策略（Same-origin-Policy）"><a href="#同源策略（Same-origin-Policy）" class="headerlink" title="同源策略（Same-origin Policy）"></a>同源策略（Same-origin Policy）</h2><p><strong>AJAX 受同源策略的约束</strong></p>
+<ul>
+<li>同源策略: 为了保证浏览器的信息安全, 当前源中的信息只能在当前的源中使用; 其他源如果想使用当前源中的信息, 需要做特殊的处理</li>
+<li>同源策略要求通信的源的<strong>协议、域名、端口号都相同</strong>, 如果三者中有一个不同就是非同源。非同源的通信叫做跨域, 需要做特殊的处理</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 协议不同</span></span><br><span class="line">http://www.baidu.com &amp; https://www.baidu.com/abc/def</span><br><span class="line"><span class="comment"># 协议不同, fill:// file协议</span></span><br><span class="line">localhost:5500 &amp; file://c://js/index.js</span><br><span class="line"><span class="comment"># 域名不同</span></span><br><span class="line">https://vip.baidui.com &amp; https://www.baidu.com</span><br><span class="line"><span class="comment"># 端口号不同</span></span><br><span class="line">localhost:63342 &amp; localhost:5500</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h2><p>常用的跨域解决方案</p>
+<ol>
+<li>JSONP「原理: 利用了 script 的 src 属性不受同源策略的约束（link 的 href、img 的 src 都不受约束）, 所以用 script 的 src 请求第三方的接口, 但是需要做一点特殊处理」<ul>
+<li>首先在页面中写一个 script 标签, src 属性值是第三方的接口</li>
+<li>声明一个函数 fn, fn 要有一个形参, 把使用第三方数据的操作都写在 fn 里面</li>
+<li>给前面的 script 的 src 上的接口多拼接一个 callback=fn 的参数</li>
+<li>如果第三方的接口支持 JSONP, 会返回一个形如 fn({xxxxx}) 的东西; script 是用来加载 JS 代码的, script 就认为 fn({xxxxx}) 是 JS 代码, 浏览器就会执行它; 而 fn() 就是让 fn 这个函数执行, 小括号内的东西就成为执行 fn 时的实参<blockquote>
+<p>注意: JSONP 只能用来发 GET 请求</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>服务端转发: 只有客户端受同源策略的约束, 服务端是不受其约束的; 请求客户端的接口, 然后让服务端在服务器上去请求第三方的接口, 拿到第三方接口的数据返回给前端即可</li>
+<li>nginx 转发: nginx 是服务端应用程序, 在服务器可以配置某种规则, nginx 就会帮客户端转发请求到第三方（需要服务端和运维的支持）</li>
+<li>CORS: Cross-Origin-Resource-Sharing 跨域资源共享; 目标源（域）需要设置一个 <code>Access-Control-Allow-Origin</code> 响应头; 这个头可以设置成具体的源, 也可以设置为 *（一般不会设置为 *, 只有 css、js、image等可能会用 *）, 表示任意的源都能访问; 这种跨于解决方案, 需要目标域服务端配合才能实现</li>
+</ol>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:1966861494@qq.com">Edsyang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.lagerstroemia.com.cn/2020/02/17/js/mount/m5/">http://blog.lagerstroemia.com.cn/2020/02/17/js/mount/m5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.lagerstroemia.com.cn" target="_blank">Edsyang</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="/img/wechat.png" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="/img/alipay.png" alt="支付宝"/><div class="post-qr-code__desc">支付宝</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2020/02/17/js/mount/m6/"><img class="prev_cover" data-src="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">M6: TCP 协议 / 状态码 / http 通信三握四挥</div></div></a></div><div class="next-post pull_right"><a href="/2020/02/17/js/mount/m4/"><img class="next_cover" data-src="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">M4: 设计模式</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var requestSetting = function (from,set) {
+  var from = from
+  var setting = set.split(',').filter(function(item){
+  return from.indexOf(item) > -1
+  });
+  setting = setting.length == 0 ? from :setting;
+  return setting
+}
+
+var guestInfo = requestSetting(['nick','mail','link'],'nick,mail,link')
+var requiredFields = requestSetting(['nick','mail','link'],'nick,mail')
+
+window.valine = new Valine({
+  el:'#vcomment',
+  appId: 'WgFk4Onl7sisfXpq9vHcehGJ-gzGzoHsz',
+  appKey: '3DLR7iLY5al5dbIdo9kWnDHU',
+  notify: false,
+  verify: false,
+  placeholder: 'Please leave your footprints',
+  avatar: 'monsterid',
+  meta: guestInfo,
+  pageSize: '10',
+  lang: 'en',
+  recordIP: false,
+  serverURLs: '',
+  emojiCDN: '',
+  emojiMaps: "",
+  enableQQ: true,
+  requiredFields: requiredFields
+});</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2020 By Edsyang</div><div class="framework-info"><span>Driven </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div><div class="icp"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener"><img class="icp-icon" src="/img/icp.png"/><span>冀ICP备19038398号</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="/js/third-party/canvas-nest.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/search/local-search.js"></script></body></html>

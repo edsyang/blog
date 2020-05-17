@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fiber 架构 | Edsyang</title><meta name="description" content="Fiber 架构 即 React v16 之后新的调度算法(reconciliation algorithm), 可以提升复杂 React 应用的响应速度和性能 React 即 reconsider(调度者), react-dom 则是 renderer, 调度者一直都是由 React 本身决定, 而 render 则可以由社区控制和贡献 原由同步更新过程的局限; 在现有 React 中, 更新过"><meta name="keywords" content="Personal blog about font-end technology &amp; record others"><meta name="author" content="Edsyang,1966861494@qq.com"><meta name="copyright" content="Edsyang"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.svg"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Fiber 架构"><meta name="twitter:description" content="Fiber 架构 即 React v16 之后新的调度算法(reconciliation algorithm), 可以提升复杂 React 应用的响应速度和性能 React 即 reconsider(调度者), react-dom 则是 renderer, 调度者一直都是由 React 本身决定, 而 render 则可以由社区控制和贡献 原由同步更新过程的局限; 在现有 React 中, 更新过"><meta name="twitter:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg"><meta property="og:type" content="article"><meta property="og:title" content="Fiber 架构"><meta property="og:url" content="http://blog.lagerstroemia.com.cn/2020/02/10/frame/react/react-fiber/"><meta property="og:site_name" content="Edsyang"><meta property="og:description" content="Fiber 架构 即 React v16 之后新的调度算法(reconciliation algorithm), 可以提升复杂 React 应用的响应速度和性能 React 即 reconsider(调度者), react-dom 则是 renderer, 调度者一直都是由 React 本身决定, 而 render 则可以由社区控制和贡献 原由同步更新过程的局限; 在现有 React 中, 更新过"><meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg"><meta property="article:published_time" content="2020-02-09T16:21:42.013Z"><meta property="article:modified_time" content="2020-05-03T03:06:41.795Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://blog.lagerstroemia.com.cn/2020/02/10/frame/react/react-fiber/"><link rel="prev" title="MVC 框架模式" href="http://blog.lagerstroemia.com.cn/2020/02/10/frame/react/mvc/"><link rel="next" title="Virtual DOM &amp; DOM diff" href="http://blog.lagerstroemia.com.cn/2020/02/10/frame/react/vdom&amp;domdiff/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: {"languages":{"author":"作者: Edsyang","link":"链接: ","source":"来源: Edsyang","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Edsyang" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">152</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">6</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">37</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#原由"><span class="toc-number">1.</span> <span class="toc-text">原由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方式"><span class="toc-number">2.</span> <span class="toc-text">方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原理-机制"><span class="toc-number">3.</span> <span class="toc-text">原理&#x2F;机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Fiber-更新的两个阶段"><span class="toc-number">4.</span> <span class="toc-text">React Fiber 更新的两个阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生命周期"><span class="toc-number">5.</span> <span class="toc-text">生命周期</span></a></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Edsyang</a></span><span class="pull_right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">Fiber 架构</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-02-09 16:21:42"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-02-09</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-05-03 03:06:41"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-05-03</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Frame/">Frame</a><i class="fa fa-angle-right post-meta__separator" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Frame/react/">react</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p><a href="https://github.com/acdlite/react-fiber-architecture" target="_blank" rel="noopener">Fiber 架构</a> 即 React v16 之后新的调度算法(reconciliation algorithm), 可以提升复杂 React 应用的响应速度和性能</p>
+<p><strong>React 即 reconsider(调度者), react-dom 则是 renderer, 调度者一直都是由 React 本身决定, 而 render 则可以由社区控制和贡献</strong></p>
+<h2 id="原由"><a href="#原由" class="headerlink" title="原由"></a>原由</h2><p><strong>同步更新过程的局限</strong>; 在现有 React 中, 更新过程是同步的, 这意味着当 React 加载/更新组件树时, 调用各组件的生命周期、计算/对比 Virtual DOM、更新 DOM 树, 整个过程中间不会停下; 而又因为 JavaScript 在浏览器的主线程上运行, 所以当组件树比较大的时候, 如果 JavaScript 运行时间过长, 就会阻塞这些其他工作, 可能会导致性能问题(界面卡顿、用户体验不好)</p>
+<p><strong>React 运行时存在三种实例</strong></p>
+<ol>
+<li>DOM - 真实 DOM 节点</li>
+<li>Instances - React 维护的 Virtual DOM Tree node, 它是根据 Elements 创建的, 对组件及 DOM 节点的抽象表示; Virtual DOM Tree 未回了组件状态及组件与 DOM 树的关系</li>
+<li>Elements - 描述 UI 长什么样子 (type, props)</li>
+</ol>
+<p><strong>更新后的在 Instances 层新增了实例</strong></p>
+<ol>
+<li>DOM - 真实 DOM 节点</li>
+<li>Instances<ol>
+<li>effect<ul>
+<li>每个 workInProgress Tree 节点上都有一个 effect list</li>
+<li>用来存放 diff 结果</li>
+<li>当前节点更新完毕会向上 merge effect list (queue 收集 diff 结果)</li>
+</ul>
+</li>
+<li>workInProgress<ul>
+<li>workInProgress tree 是 reconcile 过程中从 fiber tree 建立的当前进度快照, 用于断点恢复</li>
+</ul>
+</li>
+<li>fiber<ul>
+<li>fiber tree 与 Virtual DOM Tree 类似, 用来描述增量更新所需的上下文信息</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>Elements - 描述 UI 长什么样子 (type, props)<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// fiber tree 实际上是一个单链表(Singly Linked List) 树结构</span></span><br><span class="line">{</span><br><span class="line">  stateNode, <span class="comment">// 状态节点</span></span><br><span class="line">  child, <span class="comment">// 子节点</span></span><br><span class="line">  sibling, <span class="comment">// 兄弟节点</span></span><br><span class="line">  <span class="keyword">return</span>, <span class="comment">// 表示当前节点处理完毕后, 应该像谁提交自己的成果(effect list)</span></span><br><span class="line">  ...</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+</li>
+</ol>
+<h2 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h2><p><strong>分片</strong>; React Fiber 把更新过程碎片化(即把渲染/更新过程拆分成一系列小任务), 每执行完一段更新过程, 就把控制权交还给 React 负责任务协调的模块, 看看有没有其他紧急任务要做, 如果没有就继续更新, 如果有紧急任务, 优先执行紧急任务; 维护每一个分片的数据结构, 就是 React Fiber</p>
+<h2 id="原理-机制"><a href="#原理-机制" class="headerlink" title="原理/机制"></a>原理/机制</h2><p>React Fiber 会将一次更新过程分为多个分片来完成, 所以完全有可能一个更新任务没有完成, 就被另一个优先级更高的更新过程打断, 这时候, 优先级高的更新任务会优先处理完, 而优先级低的更新任务所做的工作则会<strong>完全作废, 等待机会重头再来</strong></p>
+<blockquote>
+<p>Fiber 数据结构 + 新的算法 = 大量计算可以被拆解, 异步化, 浏览器主线程得以释放, 保证渲染帧率, 从而提高响应性</p>
+</blockquote>
+<h2 id="React-Fiber-更新的两个阶段"><a href="#React-Fiber-更新的两个阶段" class="headerlink" title="React Fiber 更新的两个阶段"></a>React Fiber 更新的两个阶段</h2><ol>
+<li><strong>(diff 阶段) render / reconciliation</strong>: 可打断, React 在 workingProgressTree 上复用 current 上的 Fiber 数据结构(fiber tree)来进一步(通过 <code>requestIdleCallback</code> 调度方法) 来构建新的 tree, (对比 prevInstance 和 nextInstance 的状态) 标记出需要更新的节点, 放入队列中(找出需要更新哪些 DOM)<ul>
+<li>过程</li>
+<li><ol>
+<li>如果当前节点不需要更新, 直接把子节点 clone 过来, 跳到步骤5, 需要更新则打上tag</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>更新当前节点状态(props, state, context等)</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>调用shouldComponentUpdate(), false的话, 跳到步骤5</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>调用 render() 获得新的子节点, 并为子节点创建 fiber(创建过程会尽量复用现有 fiber, 子节点增删也发生在这里)</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>如果没有产生 child fiber, 该工作单元结束, 把 effect list 归并到 return, 并把当前节点的 sibling 作为下一个工作单元, 否则把 child 作为下一个工作单元</li>
+</ol>
+</li>
+<li><ol start="6">
+<li>如果没有剩余可用时间了, 等到下一次主线程空闲时才开始下一个工作单元, 否则立即开始做</li>
+</ol>
+</li>
+<li><ol start="7">
+<li>如果没有下一个工作单元了(回到了workInProgress tree的根节点), render/reconciliation 阶段结束，进入 pendingCommit 状态</li>
+</ol>
+</li>
+<li>实际上是 1-6 的工作循环, 7是出口; 工作循环每次只做一件事, 做完看要不要喘口气</li>
+</ul>
+</li>
+<li><strong>(patch 阶段) commit</strong>: 不可打断, React 将其所有的变更一次性更新到 DOM 上(同步执行)<ul>
+<li>处理 effect list (包括3种处理: 更新DOM树、调用组件生命周期函数以及更新 ref 等内部状态)</li>
+<li>该阶段结束时, 所有更新都 commit 到 DOM 树上了<blockquote>
+<p><strong>注意</strong>: Fiber 会导致的问题就是在 render 前(第一阶段) 中的生命周期函数在一次加载和更新过程中的可能会被多次调用; 所以, 如果逻辑是假设在一个更新过程中只调用一次的话, 可能会需要修改</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p>生命周期被分为两个阶段</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// render/reconciliation 阶段</span></span><br><span class="line">componentWillMount</span><br><span class="line">componentWillReceiveProps</span><br><span class="line">shouldComponentUpdate</span><br><span class="line">componentWilllUpdate</span><br><span class="line"><span class="comment">// commit 阶段</span></span><br><span class="line">componentDidMount</span><br><span class="line">componentDidUpdate</span><br><span class="line">componentWillUnmount</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>render / reconciliation 阶段的生命周期函数可能会被多次调用, 默认以低优先级执行, 被高优先级任务打断的话, 稍后重新执行</p>
+</blockquote>
+<p><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/images/frame/react/react-fiber.png" alt="React-Fiber"></p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/58863799" target="_blank" rel="noopener">via 知乎</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/26027085" target="_blank" rel="noopener">程墨</a></li>
+<li><a href="https://www.zhihu.com/question/49496872?sort=created" target="_blank" rel="noopener">如何理解 React Fiber 架构？via 知乎</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/59055212" target="_blank" rel="noopener">译文 via 知乎</a></li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:1966861494@qq.com">Edsyang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.lagerstroemia.com.cn/2020/02/10/frame/react/react-fiber/">http://blog.lagerstroemia.com.cn/2020/02/10/frame/react/react-fiber/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.lagerstroemia.com.cn" target="_blank">Edsyang</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="/img/wechat.png" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="/img/alipay.png" alt="支付宝"/><div class="post-qr-code__desc">支付宝</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2020/02/10/frame/react/mvc/"><img class="prev_cover" data-src="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">MVC 框架模式</div></div></a></div><div class="next-post pull_right"><a href="/2020/02/10/frame/react/vdom&amp;domdiff/"><img class="next_cover" data-src="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Virtual DOM &amp; DOM diff</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var requestSetting = function (from,set) {
+  var from = from
+  var setting = set.split(',').filter(function(item){
+  return from.indexOf(item) > -1
+  });
+  setting = setting.length == 0 ? from :setting;
+  return setting
+}
+
+var guestInfo = requestSetting(['nick','mail','link'],'nick,mail,link')
+var requiredFields = requestSetting(['nick','mail','link'],'nick,mail')
+
+window.valine = new Valine({
+  el:'#vcomment',
+  appId: 'WgFk4Onl7sisfXpq9vHcehGJ-gzGzoHsz',
+  appKey: '3DLR7iLY5al5dbIdo9kWnDHU',
+  notify: false,
+  verify: false,
+  placeholder: 'Please leave your footprints',
+  avatar: 'monsterid',
+  meta: guestInfo,
+  pageSize: '10',
+  lang: 'en',
+  recordIP: false,
+  serverURLs: '',
+  emojiCDN: '',
+  emojiMaps: "",
+  enableQQ: true,
+  requiredFields: requiredFields
+});</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2020 By Edsyang</div><div class="framework-info"><span>Driven </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div><div class="icp"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener"><img class="icp-icon" src="/img/icp.png"/><span>冀ICP备19038398号</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="/js/third-party/canvas-nest.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/search/local-search.js"></script></body></html>

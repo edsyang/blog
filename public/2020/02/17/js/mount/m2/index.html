@@ -1,0 +1,390 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>M2: 面向对象(OOP) | Edsyang</title><meta name="description" content="面向过程、面向对象及两者的比较面向过程  概念: 以过程为核心, 研究现在要解决的问题, 既不考虑以前, 也不考虑将来, 这段代码就解决现在的问题。如果以后再有相同的功能, 就需要再写⼀遍相同的代码 优点: 性能⽐面向对象高, 因为类调用时需要实例化, 开销比较大, 比较消耗资源; 如单片机、嵌入式开发、Linux &#x2F; Unix 等一般采⽤面向过程开发, 性能是最重要的因素 缺点: 没有面向对象易"><meta name="keywords" content="Personal blog about font-end technology &amp; record others"><meta name="author" content="Edsyang,1966861494@qq.com"><meta name="copyright" content="Edsyang"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.svg"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="M2: 面向对象(OOP)"><meta name="twitter:description" content="面向过程、面向对象及两者的比较面向过程  概念: 以过程为核心, 研究现在要解决的问题, 既不考虑以前, 也不考虑将来, 这段代码就解决现在的问题。如果以后再有相同的功能, 就需要再写⼀遍相同的代码 优点: 性能⽐面向对象高, 因为类调用时需要实例化, 开销比较大, 比较消耗资源; 如单片机、嵌入式开发、Linux &#x2F; Unix 等一般采⽤面向过程开发, 性能是最重要的因素 缺点: 没有面向对象易"><meta name="twitter:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg"><meta property="og:type" content="article"><meta property="og:title" content="M2: 面向对象(OOP)"><meta property="og:url" content="http://blog.lagerstroemia.com.cn/2020/02/17/js/mount/m2/"><meta property="og:site_name" content="Edsyang"><meta property="og:description" content="面向过程、面向对象及两者的比较面向过程  概念: 以过程为核心, 研究现在要解决的问题, 既不考虑以前, 也不考虑将来, 这段代码就解决现在的问题。如果以后再有相同的功能, 就需要再写⼀遍相同的代码 优点: 性能⽐面向对象高, 因为类调用时需要实例化, 开销比较大, 比较消耗资源; 如单片机、嵌入式开发、Linux &#x2F; Unix 等一般采⽤面向过程开发, 性能是最重要的因素 缺点: 没有面向对象易"><meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg"><meta property="article:published_time" content="2020-02-17T14:16:38.773Z"><meta property="article:modified_time" content="2020-05-03T03:09:25.047Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://blog.lagerstroemia.com.cn/2020/02/17/js/mount/m2/"><link rel="prev" title="M3: 同异步 / DOM 事件" href="http://blog.lagerstroemia.com.cn/2020/02/17/js/mount/m3/"><link rel="next" title="M1: 闭包 / 作用域链 / 堆栈内存 / this" href="http://blog.lagerstroemia.com.cn/2020/02/17/js/mount/m1/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: {"languages":{"author":"作者: Edsyang","link":"链接: ","source":"来源: Edsyang","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Edsyang" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">152</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">6</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">37</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#面向过程、面向对象及两者的比较"><span class="toc-number">1.</span> <span class="toc-text">面向过程、面向对象及两者的比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js中的内置类"><span class="toc-number">2.</span> <span class="toc-text">js中的内置类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象的研究范畴"><span class="toc-number">3.</span> <span class="toc-text">面向对象的研究范畴</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象-封装"><span class="toc-number">4.</span> <span class="toc-text">面向对象 - 封装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单例模式、高级单例模式、工厂模式实现模块化开发"><span class="toc-number">4.1.</span> <span class="toc-text">单例模式、高级单例模式、工厂模式实现模块化开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造函数模式"><span class="toc-number">4.2.</span> <span class="toc-text">构造函数模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于构造函数的原型模式-重点-原型链"><span class="toc-number">4.3.</span> <span class="toc-text">基于构造函数的原型模式 - 重点: 原型链</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原型的五大原则"><span class="toc-number">4.3.1.</span> <span class="toc-text">原型的五大原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#原型链-对象的属性查找机制"><span class="toc-number">4.3.2.</span> <span class="toc-text">原型链: 对象的属性查找机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义类和内置类"><span class="toc-number">4.3.3.</span> <span class="toc-text">自定义类和内置类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Function-类-函数类"><span class="toc-number">4.3.4.</span> <span class="toc-text">Function 类: 函数类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#补充"><span class="toc-number">4.3.5.</span> <span class="toc-text">补充</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象-继承"><span class="toc-number">5.</span> <span class="toc-text">面向对象 - 继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象-多态"><span class="toc-number">6.</span> <span class="toc-text">面向对象 - 多态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象的总结"><span class="toc-number">7.</span> <span class="toc-text">面向对象的总结</span></a></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Edsyang</a></span><span class="pull_right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">M2: 面向对象(OOP)</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-02-17 14:16:38"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-02-17</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-05-03 03:09:25"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-05-03</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/JS/">JS</a><i class="fa fa-angle-right post-meta__separator" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/JS/JS-%E4%B8%AD%E7%9A%84%E2%80%9C%E5%85%AD%E5%BA%A7%E5%A4%A7%E5%B1%B1%E2%80%9D/">JS 中的“六座大山”</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="面向过程、面向对象及两者的比较"><a href="#面向过程、面向对象及两者的比较" class="headerlink" title="面向过程、面向对象及两者的比较"></a>面向过程、面向对象及两者的比较</h2><p><strong>面向过程</strong></p>
+<ul>
+<li>概念: 以过程为核心, 研究现在要解决的问题, 既不考虑以前, 也不考虑将来, 这段代码就解决现在的问题。如果以后再有相同的功能, 就需要再写⼀遍相同的代码</li>
+<li>优点: 性能⽐面向对象高, 因为类调用时需要实例化, 开销比较大, 比较消耗资源; 如单片机、嵌入式开发、Linux / Unix 等一般采⽤面向过程开发, 性能是最重要的因素</li>
+<li>缺点: 没有面向对象易维护、易复用、易扩展</li>
+</ul>
+<p><strong>面向对象</strong></p>
+<ul>
+<li>概念: ⼀种对现实世界的理解和抽象的方法; 面向对象关心现在的功能分类解决, 现在解决过的问题, 我们过往有没有类似的代码可以复用, 我们现在的写的代码能不能给将来用 (对现在的问题分类解决, 给未来的问题提供借鉴)</li>
+<li>体现: <strong>数据类型</strong>, 其中强调的就是类型; 例如数组类、对象类..这是因为数组类和对象的属性和方法不同</li>
+<li>优点: 易维护、易复用、易扩展, 由于面向对象有封装、继承、多态的特性, 可以设计出低耦合的系统, 使系统更加灵活、更加易于维护</li>
+<li>缺点: 性能⽐面向过程低</li>
+<li>显著的特性<ol>
+<li>程序设计的重点在于数据而不是过程 </li>
+<li>程序被划分为所谓的对象 </li>
+<li>数据结构为表现对象的特性而设计 </li>
+<li>函数作为对某个对象数据的操作, 与数据结构紧密的结合在一起 </li>
+<li>数据被隐藏起来, 不能为外部函数访问 </li>
+<li>对象之间可以通过函数沟通 </li>
+<li>新的数据和函数可以在需要的时候轻而易举的添加进来 </li>
+<li>在程序设计过程中遵循由下至上(bottom-up)的设计⽅法</li>
+</ol>
+</li>
+</ul>
+<h2 id="js中的内置类"><a href="#js中的内置类" class="headerlink" title="js中的内置类"></a>js中的内置类</h2><ul>
+<li>Object 对象类（基类）</li>
+<li>Array 数组类</li>
+<li>Data 日期类</li>
+<li>RegExp 正则类</li>
+<li>Function 函数类</li>
+<li>…<blockquote>
+<p>这些内置类都是函数数据类型的</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="面向对象的研究范畴"><a href="#面向对象的研究范畴" class="headerlink" title="面向对象的研究范畴"></a>面向对象的研究范畴</h2><ul>
+<li>研究<strong>对象、类、实例</strong>三者之间的关系<ol>
+<li>对象: 万事万物皆对象, 每个对象都具备各自的属性和功能</li>
+<li>类: 抽象事物的特性和特点, 把对象分成不同的类型, 例如动物类、植物类; 类是一个是描述一群事物共同特点的抽象概念</li>
+<li>实例: 类中的⼀个具体的个体; 这个个体既然属于类, 那么这个体一定具有这个类的所有的特性和功能<blockquote>
+<p>例如: 人类就是一个类, 人类最显著的特点是可以制造并使⽤工具, 人类的属性有语言、智慧、吃饭、睡觉…. 每个人都是⼈类的⼀个实例例, 每个人都有这个类型中的所有的特性和属性</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li>讨论<strong>封装、继承、多态（重载、重写）</strong><ol>
+<li>封装: 由⾯向过程向面向对象推进; 将同种对象的属性、方法抽象成一个类, 然后通过类的属性、方法访问类「目的: 创建对象」</li>
+<li>继承: 在封装的基础上, 将同类事物继续抽象, 继承时, 子类拥有父类的属性、方法, 并且可以有⾃己特有的属性、方法</li>
+<li>多态（重载、重写）: 不同中对象之间行为的抽象「js 中没有真正的重载」</li>
+</ol>
+</li>
+</ul>
+<h2 id="面向对象-封装"><a href="#面向对象-封装" class="headerlink" title="面向对象 - 封装"></a>面向对象 - 封装</h2><ul>
+<li>私有属性: 添加到 this 上的属性（构造函数解决）</li>
+<li>共有属性: 将实例公有的属性、方法放到一个公共的位置（原型模式解决）</li>
+</ul>
+<h3 id="单例模式、高级单例模式、工厂模式实现模块化开发"><a href="#单例模式、高级单例模式、工厂模式实现模块化开发" class="headerlink" title="单例模式、高级单例模式、工厂模式实现模块化开发"></a>单例模式、高级单例模式、工厂模式实现模块化开发</h3><ol>
+<li><p>单例模式: 把描述一个对象的属性放到一个对象中, 这个封装方式成为单例模式; 对象对应的变量名成为命名空间（namespace）「<strong>优点: 解决了全局变量相互覆盖的问题</strong>」</p>
+</li>
+<li><p>高级单例模式: 不是直接将一个对象赋值给变量名, 而是在等号右侧写一个⾃执行函数, 在自执行函数末尾返回⼀个对象「<strong>优点: 可以选择哪些给外面用哪些不给, 代码很简洁</strong>」</p>
+</li>
+<li><p>工厂模式: 把创建对象的细节封装成⼀个函数, 在函数中为这个对象添加属性, 这种创建对象的模式叫做⼯厂模式「<strong>优势: 可以批量生产; 缺点: 生产出来的对象都一样, 没有类的概念</strong>」</p>
+</li>
+</ol>
+<h3 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h3><p>把创建对象的细节封装到构造函数中, 通过 this.xxx = xxx 向实例对象上添加属性, 这种方式创建对象称为构造函数模式; 此时构造函数就叫做类, 函数名叫类名(一般情况下, 类名首字母大写, 如果有多个单词, 就使用驼峰命名法)</p>
+<blockquote>
+<p>构造函数也是一个函数, 但是其内部实现和执行（调用）方式和普通函数不同</p>
+</blockquote>
+<ol>
+<li>构造函数只能用new来执行(用 new 执行, 这个函数才叫构造函数), 实例化一个实例, 命名要用大驼峰命名法(CamelCase), 当前的函数名就是类名; 声明函数时和普通函数一样<ul>
+<li><strong>new 构造函数执行机制</strong><ul>
+<li>1）开辟作用域</li>
+<li>2）形参赋值</li>
+<li>3）变量提升</li>
+<li>4）隐式创建一个属于当前这个类的实例对象, 然后把 this 指向这个实例对象</li>
+<li>5）执行构造函数中的代码, 如果 this.xxx = xxx, 就是给实例添加私有属性</li>
+<li>6）隐式返回这个实例对象, 相当于 return this</li>
+<li>7）销毁栈内存(构造函数的作用域销毁与否和普通函数一</li>
+</ul>
+</li>
+<li><strong>普通函数执行机制</strong><ul>
+<li>1）开辟私有作⽤用域</li>
+<li>2）形参赋值</li>
+<li>3）变量提升</li>
+<li>4）代码执行</li>
+<li>5）销毁栈内存(特殊情况除外)</li>
+</ul>
+</li>
+<li><strong>构造函数和普通函数的不同点</strong><ul>
+<li>1）构造函数中的 this 指向当前实例, 而普通函数中的 this 的指向和函数执行有关</li>
+<li>2）构造函数中的函数名用大驼峰命名法 CamelCase(约定俗成, ⽤用来区分普通函数)</li>
+<li>3）构造函数执行时, 有参数必须加小括号执行, 没有参数(实参)小括号可以省略</li>
+<li>4）构造函数中 return 返回的实例不受基本数据类型的值的影响, 但会打断函数的执⾏行, 但引用数据类型的值会把默认返回的 this 的指向改变</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>构造函数不需要显式的手动创建实例对象, 在通过 new 调用构造函数时, 构造函数会隐式的创建一个属于这个类的实例对象, 并把构造函数中的 this 指向这个实例对象, 后续的加工都在 this 上加工即可</li>
+<li>构造函数不需要显式的手动返回实例对象, 构造函数在执行后会隐式的返回一个当前类的实例对象, 实例对象内的属性称为「私有属性」<blockquote>
+<p>不足: 不能把属于这个类公有的属性和方法公有, this.xxx = xxx 的方式把属性都添加到了实例上, 而每个实例都是一个单独的对象, 这些对象之间无法共享属性和方法</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>实例对象的创建方式</strong></p>
+<ul>
+<li>字面量的方式（字面的意思）<ul>
+<li>创建引用数据类型: 用字面量创建的引用数据类型和实例的方式创建的数据类型没有区别</li>
+<li>创建基本数据类型</li>
+</ul>
+</li>
+<li>通过 new 类型构造函数<ul>
+<li>创建引用数据类型: 通过实例的方式创建引用数据类型和字面量创建的没有区别</li>
+<li>创建基本数据类型: 使用实例方式创建基本数据类型, 会得到一个对象; 而对象不是基本数据类型的值, 所以基本数据类型只能用字⾯量的方式创建</li>
+</ul>
+</li>
+<li><code>Object.create()</code><figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Object.create() 原理</span></span><br><span class="line"><span class="keyword">let</span> obj = {}</span><br><span class="line">obj.__proto__ = A.prototype</span><br><span class="line">B.prototype = obj</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>总结</p>
+<ol>
+<li>通过字面量创建的对象使用 Object.prototype 作为原型</li>
+<li>通过 new 创建的对象使用构造函数的 prototype 属性作为原型</li>
+<li>通过 Object.prototype() 创建的对象是用第一个参数作为原型</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<p>检测方法</p>
+<ul>
+<li>instanceof 运算符: 检测一个实例是否属于某个类型, 属于 true, 不属于 false<ul>
+<li>语法: <code>被检测数据 instanceof 数据类型</code>「当通过 instanceof 判断一个对象是否是一个类的实例时, 这个判断也会包含对父类的检测」</li>
+</ul>
+</li>
+<li>isPrototypeOf 运算符: 检测一个对象是否是另一个对象的原型(一个对象是否被包含在另一个对象的原型链中), 存在 true, 不存在 false<ul>
+<li>语法: <code>对象B.isPrototypeOf(对象A)</code> &amp; <code>对象A.prototype.isPrototypeOf(对象B)</code></li>
+</ul>
+</li>
+<li>hasOwnProperty 运算符: 检测一个属性是否是这个对象的私有属性, 如果是私有属性返回 true, 如果不是返回 false<ul>
+<li>语法: <code>对象名.hasOwnProperty('属性名')</code></li>
+</ul>
+</li>
+<li>in运算符: 检测一个对象中是否有某个属性, 如果有返回 true, 没有就返回 false<ul>
+<li>语法: <code>'属性名' in 对象</code>「in 运算符不能区分公有属性还是私有属性, 只能判断有没有」</li>
+</ul>
+</li>
+</ul>
+<p>构造函数显示设置 return「不要随意在构造函数中指定返回值」</p>
+<ul>
+<li>return 引用数据类型: 构造函数隐式返回的实例就会被 return 的这个引用数据类型的值所覆盖, 并且返回的值也不再是该类型的实例</li>
+<li>return 基本数据类型: 构造函数不受影响, 仍然正常返回实例</li>
+</ul>
+<h3 id="基于构造函数的原型模式-重点-原型链"><a href="#基于构造函数的原型模式-重点-原型链" class="headerlink" title="基于构造函数的原型模式 - 重点: 原型链"></a>基于构造函数的原型模式 - 重点: 原型链</h3><p>把一个类公有的属性、方法放在 prototype(原型) 对象中, 这样做可以实现只要是这个类实例, 就能够使用这些属性、方法, 这样做解决了公有属性和方法公有的问题</p>
+<ul>
+<li><strong>constructor 构造函数</strong>: prototype 对象上天生自带一个 constructor 属性, 它的值就是构造函数本身, 或者说 prototype 对象的 constructor 属性指向当前所属的构造函数</li>
+<li><strong>prototype 对象 - 显式原型</strong>: 每个函数(普通函数、构造函数「类」)都天生自带一个属性 prototype(原型), 它的值是一个对象, 用来存储这个类公有的属性和方法, 存储在 prototype 上的属性和方法称为公有属性和方法</li>
+<li><strong>__proto__ 属性 - 隐式原型</strong>: 每个对象都自带一个 __proto__ 属性, 它是 JS 内部使用寻找原型链的属性, __proto__ 属性指向当前对象所属类的原型<blockquote>
+<p>通过实例的 __proto__, 可以修改原型, 最好不要修改, 容易易引发错误, 可以拓展原型</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="原型的五大原则"><a href="#原型的五大原则" class="headerlink" title="原型的五大原则"></a>原型的五大原则</h4><ol>
+<li>所有的引用类型 (数组、对象、函数) 都具有对象特性, 及可自由拓展属性 (null 除外)<ul>
+<li>在原型对象中新添加(通过 prototype 添加属性的方式拓展原型)</li>
+<li>将原型的空间地址覆盖<ul>
+<li>自定义类可用新的空间地址将原来的prototype覆盖, 但会导致自带的constructor丢失(可手动添加)</li>
+<li>内置类的 prototype 的空间地址不能被覆盖, 但可以新增</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>所有的引用类型(数组、对象、函数)都有一个 __proto__ 属性(隐式原型), 属性是一个普通对象</li>
+<li>所有的函数都有一个 prototype 属性(显式原型), 属性也是一个普通对象</li>
+<li>所有的引用类型(数组、对象、函数) __proto__ 属性值指向它的构造函数的 prototype 的值</li>
+<li>当试图得到一个对象的某个属性时, 若这个对象没有这个属性, 那么会去它的 __proto__ (即它的构造函数的 <code>prototype</code>) 中寻找 ——&gt; 原型链</li>
+</ol>
+<h4 id="原型链-对象的属性查找机制"><a href="#原型链-对象的属性查找机制" class="headerlink" title="原型链: 对象的属性查找机制"></a>原型链: 对象的属性查找机制</h4><p>当我们访问一个实例对象的属性(对象.属性名)时, 浏览器会首先在实例对象的私有属性中查找, 如果找到就使用这个私有属性, 如果没找到, 通过实例对象 __proto__ 属性去当前实例对象所属类的 prototype (原型)上查找, 如果在原型的公有属性中找到这个属性, 就使用这个公有属性, 如果找不到, 就通过 prototype (原型)对象的 __proto__ 继续向上查找, 一直找到 Object（基类）的原型上, 如果还没找到, 就返回 undefined</p>
+<ol>
+<li>向原型上增加属性的方式<ul>
+<li>向原型对象上增加属性和方法: <code>构造函数.prototype.属性名 = 方法/属性</code></li>
+<li>通过实例的 __proto__ 给原型增加属性「实例 __proto__ 不仅是只读的, 还是可写的, 所以不要轻易修改这个属性」: <code>实例.__proto__.属性名 = 方法/属性</code></li>
+<li>直接将原型指向一个新对象: 这种⽅式在修改原型指向一个新对象后, 需要重新指定构造函数</li>
+</ul>
+</li>
+<li>constructor 检测数据类型</li>
+<li>面向过程、面向对象比较</li>
+</ol>
+<h4 id="自定义类和内置类"><a href="#自定义类和内置类" class="headerlink" title="自定义类和内置类"></a>自定义类和内置类</h4><ul>
+<li>自定义类: 写一个构造函数, 把自定义类的公有属性和方法写在构造函数的原型上</li>
+<li>内置类: Array / Date / RegExp / Function / Object<blockquote>
+<p>所有的内置类都是函数数据类型</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="Function-类-函数类"><a href="#Function-类-函数类" class="headerlink" title="Function 类: 函数类"></a>Function 类: 函数类</h4><blockquote>
+<p>所有的函数（类、普通函数）都是 Function 类的实例</p>
+</blockquote>
+<ul>
+<li>Array Number String Boolean Object Date Function 等, 都是函数数据类型的值; 所以这些内置类都是 Function 的实例</li>
+<li>Object 和 Function 的关系<ul>
+<li>Function 的 prototype (原型对象) 的 constructor 是构造函数本身<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.constructor === <span class="built_in">Function</span></span><br></pre></td></tr></tbody></table></figure></li>
+<li>Function 是一个类, 也是⼀个函数, 所以 Function 是⾃己的实例<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.__proto__ === <span class="built_in">Function</span>.prototype</span><br><span class="line"><span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Function</span></span><br></pre></td></tr></tbody></table></figure></li>
+<li>Object 是基类, Function 也是 Object 的实例<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span></span><br></pre></td></tr></tbody></table></figure></li>
+<li>Object (实例) 的 constructor (构造函数属性) 指向构造函数<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.constructor === <span class="built_in">Function</span></span><br></pre></td></tr></tbody></table></figure></li>
+<li>Object 是 Function 的实例, 实例的 __proto__ (隐式原型)是原型对象<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.prototype</span><br></pre></td></tr></tbody></table></figure></li>
+<li>Function 是一个类, 但 Function.prototype 是一个对象, 它的 __proto__ 属性值指向 Object.prototype<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.__proto__ === <span class="built_in">Function</span>.prototype</span><br></pre></td></tr></tbody></table></figure></li>
+<li>Object 的 prototype 的 __proto__ 为 null<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.__proto__ === <span class="literal">null</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.__proto__.__proto__ === <span class="literal">null</span></span><br></pre></td></tr></tbody></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>借大佬@冴羽 的关系图, 图中相互关联的原型组成的链状结构就是原型链, 也就是蓝色的这条线</strong><br><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/images/js/mount/prototype.png" alt="prototype"></p>
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><p><strong>constructor</strong></p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>{}</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.constructor === Person); <span class="comment">// true</span></span><br></pre></td></tr></tbody></table></figure>
+<p>当获取 person.constructor 时, 其实 person 并没有 constructor 属性, 当不能读取到 constructor 属性时, 会从 person 的原型也就是 Person.prototype 中读取, 正好原型中有该属性, 所以</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">person.constructor === Person.prototype.constructor</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>__proto__</strong></p>
+<p>绝大部分浏览器都支持这个非标准的方法访问原型, 然而它并不存在于 Person.prototype 中, 实际上, 它是来自于 Object.prototype, 与其说是一个属性, 不如说是一个 getter/setter, 当使用 obj.__proto__ 时, 可以理解成返回了 Object.getPrototypeOf(obj)</p>
+<p><strong>真的是继承么?</strong></p>
+<p>继承实际上是一个非常具有迷惑性的说法, 《你不知道的JavaScript》中的话: 继承意味着复制操作, 然而 JS 默认并不会复制对象的属性, 相反, JS 只是在两个对象之间创建关联, 这样, 一个对象就可以通过委托访问另一个对象的属性和函数, 所以与其叫继承, 委托的说法反而更准确些</p>
+<h2 id="面向对象-继承"><a href="#面向对象-继承" class="headerlink" title="面向对象 - 继承"></a>面向对象 - 继承</h2><p>⼦类继承父类, 让子类的实例能够访问父类的属性和方法, 把⽗类的私有属性或公有属性变成子类的私有属性或者公有属性; 如让 B 类继承 A 类, B 类为子类, A 类为父类(超类)</p>
+<p>继承方式</p>
+<ul>
+<li><p><strong>原型（链）继承</strong>: 将子类的原型改写成父类的实例, 把⽗类私有和公有属性都继承为子类公有的属性和方法</p>
+<p>「缺点: 原型(链)继承要重新指定继承后的 constructor 属性」</p>
+</li>
+<li><p><strong>借⽤构造函数继承(call 继承)</strong>: 在子类的构造函数中 call 执行⽗类的构造函数, 此时父类是被当成一个普通函数使用, 把父类构造函数中的 this 修改为子类的实例</p>
+<p>「缺点: 只继承父类的私有的属性和方法」</p>
+</li>
+<li><p><strong>组合继承</strong>: （将原型(链)继承和借用构造函数继承(call 继承)组合到一起）把⽗类公有的继承到子类公有的, 父类私有的继承到子类私有的</p>
+<p>「缺点: 子类会继承两次父类的私有属性, 第一次来自于原型(链)继承时父类私有的成为子类公有的, 另⼀次来自于借用构造函数继承(call 继承)时把父类私有的变成子类私有的。此时, ⼦类的原型上有⼀份父类私有的, 在子类私有的也有一份⽗类私有的」</p>
+</li>
+<li><p><strong>原型式继承</strong>: 把父类的公有属性继承给子类的公有属性（创建一个指定 __proto__ 的对象: Object.create(protoObj) 返回一个新对象, 这个新对象的 __proto__ 指向 protoObj）</p>
+<p>「缺点: 只继承父类的公有属性和方法」</p>
+</li>
+<li><p><strong>寄生组合式继承</strong>: （将原型式继承和借用构造函数继承[call 继承]组合到一起）把父类公有的继承为子类公有的, 把父类私有的继承为子类私有的</p>
+</li>
+<li><p><strong>冒充对象继承</strong>: 将⽗类私有、公有的属性都变成子类的私有属性（在子类的构造函数中创建一个父类的实例, 遍历这个实例, 把父类实例的属性、属性值都添加到子类实例身上）</p>
+</li>
+<li><p>（ES6）<strong>extends 关键字继承</strong>: class 关键字, ES6 新增, 用于声明一个类（class、extends继承: 原理是寄生组合式继承）</p>
+</li>
+</ul>
+<h2 id="面向对象-多态"><a href="#面向对象-多态" class="headerlink" title="面向对象 - 多态"></a>面向对象 - 多态</h2><p>JS 中没有真正的重载, 因为 JS 中不允许声明多个同名函数, 声明多个同名函数时, 这个函数名就代表最后一个函数</p>
+<ul>
+<li>重写: 子类可以重写父类的属性和方法 </li>
+<li>重载: 有多个同名函数, 但是这些函数的参数(签名)不同, 当传不同参数时, 会自动调用不同函数执行; JS 中没有真正的重载, 但这个功能可以模拟, 根据不同的参数做不同的事情</li>
+</ul>
+<h2 id="面向对象的总结"><a href="#面向对象的总结" class="headerlink" title="面向对象的总结"></a>面向对象的总结</h2><ol>
+<li>类: 类都是一个函数数据类型（Function）, 每个类都有一个原型（prototype）</li>
+<li>原型（prototype）: 每个类的原型都是对象, 并且有一个特殊的属性（constructor）, 它的值指向当前类的构造函数本身</li>
+<li>对象: （实例对象、原型对象、函数对象…）都有一个特殊的属性 <code>__proto__</code>, 它的值指向当前对象（实例对象、原型对象、函数对象…）所属类的原型（prototype）</li>
+</ol>
+<p><strong>创建⼀个函数, 将私有属性写在函数里面(this.xxx = xxx), 公有属性放到 prototype 上(xx.prototype.XXX = 方法、属性), 再 new 出来这个构造函数就完事了</strong></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:1966861494@qq.com">Edsyang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.lagerstroemia.com.cn/2020/02/17/js/mount/m2/">http://blog.lagerstroemia.com.cn/2020/02/17/js/mount/m2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.lagerstroemia.com.cn" target="_blank">Edsyang</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="/img/wechat.png" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="/img/alipay.png" alt="支付宝"/><div class="post-qr-code__desc">支付宝</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2020/02/17/js/mount/m3/"><img class="prev_cover" data-src="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">M3: 同异步 / DOM 事件</div></div></a></div><div class="next-post pull_right"><a href="/2020/02/17/js/mount/m1/"><img class="next_cover" data-src="https://tva1.sinaimg.cn/large/007S8ZIlly1gegal5ikmoj30u00xpe81.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">M1: 闭包 / 作用域链 / 堆栈内存 / this</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var requestSetting = function (from,set) {
+  var from = from
+  var setting = set.split(',').filter(function(item){
+  return from.indexOf(item) > -1
+  });
+  setting = setting.length == 0 ? from :setting;
+  return setting
+}
+
+var guestInfo = requestSetting(['nick','mail','link'],'nick,mail,link')
+var requiredFields = requestSetting(['nick','mail','link'],'nick,mail')
+
+window.valine = new Valine({
+  el:'#vcomment',
+  appId: 'WgFk4Onl7sisfXpq9vHcehGJ-gzGzoHsz',
+  appKey: '3DLR7iLY5al5dbIdo9kWnDHU',
+  notify: false,
+  verify: false,
+  placeholder: 'Please leave your footprints',
+  avatar: 'monsterid',
+  meta: guestInfo,
+  pageSize: '10',
+  lang: 'en',
+  recordIP: false,
+  serverURLs: '',
+  emojiCDN: '',
+  emojiMaps: "",
+  enableQQ: true,
+  requiredFields: requiredFields
+});</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2020 By Edsyang</div><div class="framework-info"><span>Driven </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div><div class="icp"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener"><img class="icp-icon" src="/img/icp.png"/><span>冀ICP备19038398号</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="/js/third-party/canvas-nest.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/search/local-search.js"></script></body></html>
